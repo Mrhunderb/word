@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   ming_cute_icons: ^0.0.3
   get: ^4.6.5
+  dio: ^5.4.0
 
 dev_dependencies:
   flutter_test:
