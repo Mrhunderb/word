@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
-import 'package:words/page/home.dart';
-import 'package:words/page/register.dart';
-import 'package:words/page/widget/login_button.dart';
-import 'package:words/page/widget/login_hint.dart';
-import 'package:words/page/widget/login_input.dart';
+import 'package:words/home/home.dart';
+import 'package:words/login/register.dart';
+import 'package:words/login/widget/login_button.dart';
+import 'package:words/login/widget/login_hint.dart';
+import 'package:words/login/widget/login_input.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
