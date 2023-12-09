@@ -2,35 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
-import 'package:words/page/home.dart';
-import 'package:words/page/register.dart';
 import 'package:words/page/widget/login_button.dart';
 import 'package:words/page/widget/login_hint.dart';
 import 'package:words/page/widget/login_input.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPage();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPage extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final double widthOfSquare = 40.0;
   // Controller
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _repeatController = TextEditingController();
 
-  void login() {
+  void register() {
     String username = _usernameController.text;
     String password = _passwordController.text;
+    String repeat = _repeatController.text;
     // TODO
     username.isEmpty;
     password.isEmpty;
-    Get.off(const HomePage());
+    repeat.isEmpty;
   }
 
-  Widget loginContent() {
+  Widget registerContent() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -50,17 +50,32 @@ class _LoginPage extends State<LoginPage> {
           isHidden: false,
         ),
         const Padding(
-          padding: EdgeInsets.only(bottom: 80),
+          padding: EdgeInsets.only(bottom: 30),
         ),
-        LoginButton(buttonText: "登陆", funcOnTap: login),
+        LoginInput(
+          prefixIcon: MingCuteIcons.mgc_repeat_fill,
+          hint: "请重复密码",
+          inputController: _passwordController,
+          isHidden: false,
+        ),
+        const Padding(
+          padding: EdgeInsets.only(bottom: 45),
+        ),
+        LoginButton(
+          buttonText: "确认注册",
+          funcOnTap: () {
+            // TODO
+            Get.back();
+          },
+        ),
         const Padding(
           padding: EdgeInsets.only(bottom: 15),
         ),
         LoginHint(
-          hintText: "还没有账户？",
-          buttonText: "注册",
+          hintText: "已拥有账户？",
+          buttonText: "登陆",
           funcOnTap: () {
-            Get.to(const RegisterPage());
+            Get.back();
           },
         ),
       ],
@@ -78,7 +93,7 @@ class _LoginPage extends State<LoginPage> {
           right: widthOfSquare,
           // top: kToolbarHeight,
         ),
-        child: loginContent(),
+        child: registerContent(),
       ),
     );
   }

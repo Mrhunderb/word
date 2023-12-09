@@ -20,7 +20,7 @@ class LoginInput extends StatefulWidget {
 
 class _LoginInput extends State<LoginInput> {
   static const double _inputFieldIconSize = 28;
-  static const double _inputFieldFontSize = 20;
+  static const double _inputFieldFontSize = 18;
   static const double _inputBorderRadius = 20.0;
   static const Color _inputFieldColor = Color.fromRGBO(35, 62, 99, 0.35);
 
@@ -41,6 +41,7 @@ class _LoginInput extends State<LoginInput> {
         _isHidden ? Icons.visibility : Icons.visibility_off,
       ),
       color: _inputFieldColor,
+      iconSize: _inputFieldIconSize,
     );
   }
 
