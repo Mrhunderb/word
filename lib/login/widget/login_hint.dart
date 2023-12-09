@@ -16,7 +16,7 @@ class LoginHint extends StatefulWidget {
 }
 
 class _LoginHintState extends State<LoginHint> {
-  static const Color textButtonColor = Colors.blue;
+  static const Color textButtonColor = Colors.blueAccent;
   static const double fontSize = 15.0;
 
   @override

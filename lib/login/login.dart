@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
 import 'package:words/home/home.dart';
 import 'package:words/login/register.dart';
+import 'package:words/login/widget/app_icon.dart';
 import 'package:words/login/widget/login_button.dart';
 import 'package:words/login/widget/login_hint.dart';
 import 'package:words/login/widget/login_input.dart';
@@ -34,6 +36,10 @@ class _LoginPage extends State<LoginPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const AppIconWidget(),
+        const Padding(
+          padding: EdgeInsets.only(bottom: 50),
+        ),
         LoginInput(
           prefixIcon: MingCuteIcons.mgc_user_2_fill,
           hint: "请输入用户名",
@@ -60,7 +66,10 @@ class _LoginPage extends State<LoginPage> {
           hintText: "还没有账户？",
           buttonText: "注册",
           funcOnTap: () {
-            Get.to(const RegisterPage());
+            Get.to(
+              const RegisterPage(),
+              transition: Transition.downToUp,
+            );
           },
         ),
       ],
