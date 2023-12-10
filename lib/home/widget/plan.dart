@@ -22,7 +22,7 @@ class LearnInfo {
 
 List<Widget> planContent() {
   List<LearnInfo> list = [
-    LearnInfo(title: "计划", todo: 40, icon: MingCuteIcons.mgc_calendar_2_fill),
+    LearnInfo(title: "计划学习", todo: 40, icon: MingCuteIcons.mgc_calendar_2_fill),
     LearnInfo(title: "待新学", todo: 40, icon: MingCuteIcons.mgc_report_fill),
     LearnInfo(title: "待复习", todo: 200, icon: MingCuteIcons.mgc_repeat_fill),
   ];

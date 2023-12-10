@@ -4,7 +4,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 class DictProgress extends StatelessWidget {
   final int total;
   final int achive;
-  final double _progressHight = 20.0;
+  final double _progressHight = 18.0;
   final Radius _progressRadius = const Radius.circular(20.0);
 
   const DictProgress({
