@@ -38,6 +38,7 @@ dependencies:
   percent_indicator: ^4.2.3
   get: ^4.6.5
   dio: ^5.4.0
+  flip: ^2.0.0
 
 dev_dependencies:
   flutter_test:

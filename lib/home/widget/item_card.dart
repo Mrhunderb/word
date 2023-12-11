@@ -40,7 +40,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1,
+      elevation: 2,
       margin: const EdgeInsets.only(bottom: 20, top: 20),
       child: Container(
         height: cardHeight,

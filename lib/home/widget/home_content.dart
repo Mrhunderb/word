@@ -6,7 +6,7 @@ import 'package:words/home/widget/hello.dart';
 import 'package:words/home/widget/item_card.dart';
 import 'package:words/home/widget/learn_button.dart';
 import 'package:words/home/widget/plan.dart';
-import 'package:words/word/word.dart';
+import 'package:words/word/word_page.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
