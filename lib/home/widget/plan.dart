@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
+import 'package:words/home/model/plan_info.dart';
 
 const TextStyle _planStyle = TextStyle(fontSize: 16);
 const TextStyle _planStyleBold = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w700,
 );
-
-class LearnInfo {
-  final String title;
-  final int todo;
-  final IconData icon;
-
-  LearnInfo({
-    required this.title,
-    required this.todo,
-    required this.icon,
-  });
-}
 
 List<Widget> planContent() {
   List<LearnInfo> list = [

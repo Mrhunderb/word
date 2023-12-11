@@ -1,25 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
+import 'package:words/home/model/page_info.dart';
 import 'package:words/home/widget/dict_progress.dart';
 import 'package:words/home/widget/hello.dart';
+import 'package:words/home/widget/home_content.dart';
 import 'package:words/home/widget/item_card.dart';
+import 'package:words/home/widget/learn_button.dart';
 import 'package:words/home/widget/plan.dart';
-import 'package:words/login/widget/login_button.dart';
-
-class PageInformation {
-  final int index;
-  final String name;
-  final IconData icon;
-  final IconData iconChoice;
-
-  PageInformation({
-    required this.index,
-    required this.name,
-    required this.icon,
-    required this.iconChoice,
-  });
-}
+import 'package:words/word/word.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,10 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-
-  static final List<Widget> _pages = [
-    const HelloIcon(),
-  ];
 
   static final _bottomItems = [
     PageInformation(
@@ -56,6 +41,12 @@ class _HomePageState extends State<HomePage> {
     ),
   ];
 
+  static final List<Widget> _pages = [
+    const HomeContent(),
+    const WordPage(),
+    const WordPage(),
+  ];
+
   void _bottomItemTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -70,26 +61,7 @@ class _HomePageState extends State<HomePage> {
           left: 20,
           right: 20,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const HelloIcon().paddingOnly(bottom: 20),
-            // DictCard(),
-            ItemCard(
-              title: "我的词典",
-              cardHeight: 125.0,
-              content: const [DictProgress(total: 100, achive: 45)],
-            ),
-            ItemCard(
-              title: "今日计划",
-              cardHeight: 205.0,
-              content: planContent(),
-            ),
-            LoginButton(buttonText: "开始背单词", funcOnTap: () {})
-                .paddingOnly(bottom: 20),
-            LoginButton(buttonText: "开始测试", funcOnTap: () {}),
-          ],
-        ),
+        child: _pages[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
