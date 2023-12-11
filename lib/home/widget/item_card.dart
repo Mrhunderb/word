@@ -17,6 +17,7 @@ class ItemCard extends StatelessWidget {
 
   Row header() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
@@ -25,6 +26,13 @@ class ItemCard extends StatelessWidget {
             fontWeight: FontWeight.w800,
           ),
         ),
+        TextButton(
+          onPressed: () {},
+          child: TextButton(
+            onPressed: () {},
+            child: const Text("查看详细"),
+          ),
+        )
       ],
     );
   }
@@ -40,18 +48,18 @@ class ItemCard extends StatelessWidget {
           borderRadius: cardRadius,
         ),
         child: Center(
-          child: FractionallySizedBox(
-            widthFactor: 0.9,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                header().paddingOnly(top: 12, bottom: 30),
-                Column(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              header().paddingOnly(left: 20),
+              FractionallySizedBox(
+                widthFactor: 0.9,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: content.toList(),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

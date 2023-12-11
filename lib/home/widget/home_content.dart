@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:words/home/widget/dict_progress.dart';
 import 'package:words/home/widget/hello.dart';
 import 'package:words/home/widget/item_card.dart';
 import 'package:words/home/widget/learn_button.dart';
 import 'package:words/home/widget/plan.dart';
+import 'package:words/word/word.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
@@ -14,20 +16,28 @@ class HomeContent extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const HelloIcon().paddingOnly(bottom: 20),
-        // DictCard(),
+        const HelloIcon(),
+        const SizedBox(height: 20),
         ItemCard(
           title: "我的词典",
           cardHeight: 125.0,
-          content: const [DictProgress(total: 100, achive: 45)],
+          content: const [
+            SizedBox(height: 8),
+            DictProgress(total: 100, achive: 45)
+          ],
         ),
         ItemCard(
           title: "今日计划",
           cardHeight: 205.0,
           content: planContent(),
         ),
-        LearnButton(buttonText: "开始背单词", funcOnTap: () {})
-            .paddingOnly(top: 20, bottom: 20),
+        const SizedBox(height: 20),
+        LearnButton(
+            buttonText: "开始背单词",
+            funcOnTap: () {
+              Get.to(WordPage());
+            }),
+        const SizedBox(height: 25),
         LearnButton(buttonText: "开始测试", funcOnTap: () {}),
       ],
     );

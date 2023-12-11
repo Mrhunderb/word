@@ -16,7 +16,7 @@ class LearnButton extends StatefulWidget {
 
 class _LearnButtonState extends State<LearnButton> {
   static const double _buttomRadius = 40.0;
-  static const double _buttonHeight = 45.0;
+  static const double _buttonHeight = 48.0;
   static const double _buttonWidth = double.infinity;
   static const double _buttonTextSize = 21;
 

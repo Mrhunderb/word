@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
 import 'package:words/home/model/page_info.dart';
-import 'package:words/home/widget/dict_progress.dart';
-import 'package:words/home/widget/hello.dart';
 import 'package:words/home/widget/home_content.dart';
-import 'package:words/home/widget/item_card.dart';
-import 'package:words/home/widget/learn_button.dart';
-import 'package:words/home/widget/plan.dart';
-import 'package:words/word/word.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,8 +36,10 @@ class _HomePageState extends State<HomePage> {
 
   static final List<Widget> _pages = [
     const HomeContent(),
-    const WordPage(),
-    const WordPage(),
+    const HomeContent(),
+    const HomeContent(),
+    // const WordPage(),
+    // const WordPage(),
   ];
 
   void _bottomItemTap(int index) {
