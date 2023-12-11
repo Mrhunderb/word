@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
 import 'package:words/home/home.dart';
 import 'package:words/login/register.dart';
