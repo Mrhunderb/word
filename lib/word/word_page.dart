@@ -1,27 +1,49 @@
-import 'package:flip/flip.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:words/word/model/word.dart';
-import 'package:words/word/wiget/word_spec.dart';
-import 'package:words/word/wiget/word_view.dart';
+import 'package:words/word/wiget/view_spec.dart';
 
 class WordPage extends StatefulWidget {
-  final FlipController controller = FlipController();
-
-  WordPage({super.key});
+  const WordPage({super.key});
 
   @override
   State<WordPage> createState() => _WordPageState();
 }
 
 class _WordPageState extends State<WordPage> {
-  Word example = Word(
-    word: 'example',
+  final PageController _controller = PageController();
+
+  Word example1 = Word(
+    word: 'example1',
     pronunciation: 'ɪɡˈzæmpəl',
     definition: 'n. 例子；范例；模范',
     example: 'This is an example.',
   );
+  Word example2 = Word(
+    word: 'example2',
+    pronunciation: 'ɪɡˈzæmpəl',
+    definition: 'n. 例子；范例；模范',
+    example: 'This is an example.',
+  );
+  Word example3 = Word(
+    word: 'example3',
+    pronunciation: 'ɪɡˈzæmpəl',
+    definition: 'n. 例子；范例；模范',
+    example: 'This is an example.',
+  );
+
+  void _next() {
+    _controller.nextPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  late List<Widget> words = [
+    ViewSpec(word: example1, next: _next),
+    ViewSpec(word: example2, next: _next),
+    ViewSpec(word: example3, next: _next),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +58,10 @@ class _WordPageState extends State<WordPage> {
         title: const Text('背单词'),
         centerTitle: true, // Aligns the title in the middle
       ),
-      body: Center(
-        child: Flip(
-          controller: widget.controller,
-          firstChild: WordView(controller: widget.controller, word: example),
-          secondChild: WordSpec(word: example),
-        ),
+      body: PageView(
+        controller: _controller,
+        physics: const NeverScrollableScrollPhysics(),
+        children: words,
       ),
     );
   }

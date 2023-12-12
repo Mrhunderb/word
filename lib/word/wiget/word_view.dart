@@ -1,16 +1,16 @@
-import 'package:flip/flip.dart';
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:words/word/model/word.dart';
-import 'package:words/word/word_card.dart';
+import 'package:words/word/wiget/word_card.dart';
 
 class WordView extends StatelessWidget {
-  final FlipController controller;
   final Word word;
+  final GlobalKey<FlipCardState> cardKey;
 
   const WordView({
     super.key,
-    required this.controller,
     required this.word,
+    required this.cardKey,
   });
 
   List<Widget> header() {
@@ -42,7 +42,7 @@ class WordView extends StatelessWidget {
       const SizedBox(height: 24),
       FilledButton(
         onPressed: () {
-          controller.flip();
+          cardKey.currentState!.toggleCard();
         },
         style: ButtonStyle(
           minimumSize: MaterialStateProperty.all(const Size(135, 52)),
@@ -65,11 +65,11 @@ class WordView extends StatelessWidget {
           child: GestureDetector(
             onVerticalDragEnd: (details) {
               if (details.primaryVelocity! < 0) {
-                controller.flip();
+                cardKey.currentState!.toggleCard();
               }
             },
             onTap: () {
-              controller.flip();
+              cardKey.currentState!.toggleCard();
             },
             child: WordCard(contents: header()),
           ),

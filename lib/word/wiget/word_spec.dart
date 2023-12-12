@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:words/word/model/word.dart';
 import 'package:words/word/wiget/word_item.dart';
-import 'package:words/word/word_card.dart';
+import 'package:words/word/wiget/word_card.dart';
 
 class WordSpec extends StatelessWidget {
   final Word word;
+  final Function next;
 
   const WordSpec({
     super.key,
     required this.word,
+    required this.next,
   });
 
   List<Widget> _specContetn() {
@@ -21,27 +23,35 @@ class WordSpec extends StatelessWidget {
           fontWeight: FontWeight.w900,
         ),
       ),
-      //   Text(
-      //     "[${word.pronunciation}]",
-      //     style: const TextStyle(
-      //       fontSize: 16,
-      //     ),
-      //   ),
-      //   Text(
-      //     word.definition,
-      //     style: const TextStyle(
-      //       fontSize: 16,
-      //     ),
-      //   ),
-      //   Text(word.example, style: const TextStyle(fontSize: 16)),
+      Text(
+        "[${word.pronunciation}]",
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       WordItem(
         header: "释义",
-        content: [Text(word.definition)],
+        content: [
+          Text(
+            word.definition,
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          )
+        ],
       ),
       WordItem(
         header: "例句",
-        content: [Text(word.example)],
+        content: [
+          Text(
+            word.example,
+            style: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+        ],
       ),
+      const SizedBox(height: 24),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -52,7 +62,9 @@ class WordSpec extends StatelessWidget {
                 const Size(125, 52),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              next();
+            },
             child: const Text(
               '不认识',
               style: TextStyle(
@@ -68,7 +80,9 @@ class WordSpec extends StatelessWidget {
                 const Size(125, 52),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              next();
+            },
             child: const Text(
               '认识',
               style: TextStyle(
