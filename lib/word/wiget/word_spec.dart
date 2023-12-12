@@ -1,27 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:words/word/model/word.dart';
+import 'package:words/word/wiget/word_item.dart';
 import 'package:words/word/word_card.dart';
 
 class WordSpec extends StatelessWidget {
-  const WordSpec({super.key});
+  final Word word;
+
+  const WordSpec({
+    super.key,
+    required this.word,
+  });
 
   List<Widget> _specContetn() {
     return [
-      const Text(
-        '单词详细',
-        style: TextStyle(fontSize: 24),
+      Text(
+        word.word,
+        style: const TextStyle(
+          fontSize: 32,
+          fontWeight: FontWeight.w900,
+        ),
+      ),
+      //   Text(
+      //     "[${word.pronunciation}]",
+      //     style: const TextStyle(
+      //       fontSize: 16,
+      //     ),
+      //   ),
+      //   Text(
+      //     word.definition,
+      //     style: const TextStyle(
+      //       fontSize: 16,
+      //     ),
+      //   ),
+      //   Text(word.example, style: const TextStyle(fontSize: 16)),
+      WordItem(
+        header: "释义",
+        content: [Text(word.definition)],
+      ),
+      WordItem(
+        header: "例句",
+        content: [Text(word.example)],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.all(5),
+              minimumSize: MaterialStateProperty.all(
+                const Size(125, 52),
+              ),
+            ),
             onPressed: () {},
-            child: const Text('不认识'),
+            child: const Text(
+              '不认识',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
           ),
-          const SizedBox(width: 16),
-          ElevatedButton(
+          const SizedBox(width: 40),
+          FilledButton(
+            style: ButtonStyle(
+              minimumSize: MaterialStateProperty.all(
+                const Size(125, 52),
+              ),
+            ),
             onPressed: () {},
-            child: const Text('认识'),
+            child: const Text(
+              '认识',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
           ),
         ],
       ).paddingOnly(bottom: 20),

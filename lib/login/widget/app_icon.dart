@@ -7,7 +7,7 @@ class AppIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       child: Image.asset(
-        "asserts/icon.png",
+        "assets/icon.png",
         width: 120,
         height: 120,
       ),

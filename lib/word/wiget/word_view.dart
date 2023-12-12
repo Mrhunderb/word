@@ -20,7 +20,7 @@ class WordView extends StatelessWidget {
           Text(
             word.word,
             style: const TextStyle(
-              fontSize: 32,
+              fontSize: 35,
               fontWeight: FontWeight.w900,
             ),
           ),
@@ -32,6 +32,14 @@ class WordView extends StatelessWidget {
           ),
         ],
       ),
+      const Text(
+        "请回想中文释义",
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.grey,
+        ),
+      ),
+      const SizedBox(height: 24),
       FilledButton(
         onPressed: () {
           controller.flip();
@@ -54,7 +62,17 @@ class WordView extends StatelessWidget {
       children: [
         FractionallySizedBox(
           widthFactor: 0.88,
-          child: WordCard(contents: header()),
+          child: GestureDetector(
+            onVerticalDragEnd: (details) {
+              if (details.primaryVelocity! < 0) {
+                controller.flip();
+              }
+            },
+            onTap: () {
+              controller.flip();
+            },
+            child: WordCard(contents: header()),
+          ),
         ),
       ],
     );

@@ -7,7 +7,7 @@ class HelloIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       child: Image.asset(
-        "asserts/hi.png",
+        "assets/hi.png",
         width: 85,
         height: 85,
       ),

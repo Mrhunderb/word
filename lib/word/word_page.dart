@@ -40,7 +40,7 @@ class _WordPageState extends State<WordPage> {
         child: Flip(
           controller: widget.controller,
           firstChild: WordView(controller: widget.controller, word: example),
-          secondChild: const WordSpec(),
+          secondChild: WordSpec(word: example),
         ),
       ),
     );
