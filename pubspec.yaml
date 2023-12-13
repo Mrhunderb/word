@@ -40,6 +40,8 @@ dependencies:
   get: ^4.6.5
   dio: ^5.4.0
   flip_card: ^0.7.0
+  audioplayers: ^5.2.1
+  settings_ui: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -35,7 +35,7 @@ class HomeContent extends StatelessWidget {
         LearnButton(
             buttonText: "开始背单词",
             funcOnTap: () {
-              Get.to(WordPage());
+              Get.to(const WordPage());
             }),
         const SizedBox(height: 25),
         LearnButton(buttonText: "开始测试", funcOnTap: () {}),

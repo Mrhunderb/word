@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:words/word/model/word.dart';
+import 'package:words/word/wiget/audio_button.dart';
 import 'package:words/word/wiget/word_item.dart';
 import 'package:words/word/wiget/word_card.dart';
 
@@ -16,18 +17,17 @@ class WordSpec extends StatelessWidget {
 
   List<Widget> _specContetn() {
     return [
-      Text(
-        word.word,
-        style: const TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.w900,
-        ),
-      ),
-      Text(
-        "[${word.pronunciation}]",
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+      Column(
+        children: [
+          Text(
+            word.word,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          PlayAudioButton(word: word, type: 1),
+        ],
       ),
       WordItem(
         header: "释义",

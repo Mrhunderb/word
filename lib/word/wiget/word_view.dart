@@ -1,6 +1,7 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:words/word/model/word.dart';
+import 'package:words/word/wiget/audio_button.dart';
 import 'package:words/word/wiget/word_card.dart';
 
 class WordView extends StatelessWidget {
@@ -24,12 +25,14 @@ class WordView extends StatelessWidget {
               fontWeight: FontWeight.w900,
             ),
           ),
-          Text(
-            "[${word.pronunciation}]",
-            style: const TextStyle(
-              fontSize: 16,
-            ),
-          ),
+          PlayAudioButton(word: word, type: 1),
+          // Text(
+          //   "[${word.pronunciation}]",
+          //   style: const TextStyle(
+          //     color: Colors.grey,
+          //     fontSize: 16,
+          //   ),
+          // ),
         ],
       ),
       const Text(
@@ -39,7 +42,7 @@ class WordView extends StatelessWidget {
           color: Colors.grey,
         ),
       ),
-      const SizedBox(height: 24),
+      const SizedBox(height: 28),
       FilledButton(
         onPressed: () {
           cardKey.currentState!.toggleCard();

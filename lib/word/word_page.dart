@@ -14,19 +14,19 @@ class _WordPageState extends State<WordPage> {
   final PageController _controller = PageController();
 
   Word example1 = Word(
-    word: 'example1',
+    word: 'example',
     pronunciation: 'ɪɡˈzæmpəl',
     definition: 'n. 例子；范例；模范',
     example: 'This is an example.',
   );
   Word example2 = Word(
-    word: 'example2',
+    word: 'exam',
     pronunciation: 'ɪɡˈzæmpəl',
     definition: 'n. 例子；范例；模范',
     example: 'This is an example.',
   );
   Word example3 = Word(
-    word: 'example3',
+    word: 'acid',
     pronunciation: 'ɪɡˈzæmpəl',
     definition: 'n. 例子；范例；模范',
     example: 'This is an example.',
