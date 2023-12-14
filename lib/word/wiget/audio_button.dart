@@ -30,7 +30,7 @@ class _PlayAudioButtonState extends State<PlayAudioButton> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "[${widget.word.word}]",
+          "[${widget.word.pronunciation}]",
           style: const TextStyle(fontSize: 16),
         ),
         const SizedBox(width: 3),

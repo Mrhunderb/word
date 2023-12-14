@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
+import 'package:words/dict/dict_page.dart';
 import 'package:words/home/model/page_info.dart';
 import 'package:words/home/widget/home_content.dart';
 
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
 
   static final List<Widget> _pages = [
     const HomeContent(),
-    const HomeContent(),
+    const DictPage(),
     const HomeContent(),
     // const WordPage(),
     // const WordPage(),
@@ -51,13 +52,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(
-          left: 20,
-          right: 20,
-        ),
-        child: _pages[_selectedIndex],
-      ),
+      body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _bottomItemTap,

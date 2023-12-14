@@ -13,7 +13,7 @@ class WordCard extends StatelessWidget {
       // Wrap the text widget with Card
       elevation: 2,
       child: Container(
-        height: 760,
+        height: 740,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(60),
         ),

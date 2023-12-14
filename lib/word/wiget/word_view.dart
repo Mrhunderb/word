@@ -26,13 +26,6 @@ class WordView extends StatelessWidget {
             ),
           ),
           PlayAudioButton(word: word, type: 1),
-          // Text(
-          //   "[${word.pronunciation}]",
-          //   style: const TextStyle(
-          //     color: Colors.grey,
-          //     fontSize: 16,
-          //   ),
-          // ),
         ],
       ),
       const Text(
