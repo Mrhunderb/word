@@ -18,7 +18,7 @@ class QuizContent extends StatelessWidget {
           children: [
             const SizedBox(height: 40),
             const Text(
-              'Question 1:',
+              'Question:',
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),

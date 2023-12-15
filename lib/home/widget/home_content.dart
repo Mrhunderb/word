@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:words/quiz/exam_page.dart';
+import 'package:words/quiz/quiz_page.dart';
 import 'package:words/home/widget/dict_progress.dart';
 import 'package:words/home/widget/hello.dart';
 import 'package:words/home/widget/item_card.dart';

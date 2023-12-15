@@ -26,7 +26,7 @@ class _QuizButtonState extends State<QuizButton> {
           Color color;
           if (selectedOption == option) {
             color = option == widget.quiz.correctOption
-                ? const Color.fromARGB(255, 104, 220, 170)
+                ? const Color.fromARGB(255, 76, 175, 132)
                 : const Color.fromARGB(255, 252, 118, 111);
           } else if (option == widget.quiz.correctOption &&
               selectedOption != 0) {
