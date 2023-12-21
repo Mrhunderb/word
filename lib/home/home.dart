@@ -3,6 +3,7 @@ import 'package:ming_cute_icons/ming_cute_icons.dart';
 import 'package:words/dict/dict_page.dart';
 import 'package:words/home/model/page_info.dart';
 import 'package:words/home/widget/home_content.dart';
+import 'package:words/user/user_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,9 +39,7 @@ class _HomePageState extends State<HomePage> {
   static final List<Widget> _pages = [
     const HomeContent(),
     const DictPage(),
-    const HomeContent(),
-    // const WordPage(),
-    // const WordPage(),
+    const UserPage(),
   ];
 
   void _bottomItemTap(int index) {
