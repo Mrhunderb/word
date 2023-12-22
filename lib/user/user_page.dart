@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:words/user/widget/history_card.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -38,6 +39,15 @@ class _UserPageState extends State<UserPage> {
               ),
             ],
           )
+        ],
+      ),
+      const SizedBox(height: 24.0),
+      const Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          HistoryCard(unit: "天", content: "连续打卡", n: 0),
+          HistoryCard(unit: "天", content: "累计学习", n: 86),
+          HistoryCard(unit: "词", content: "累计学习", n: 2881),
         ],
       ),
       const SizedBox(height: 24.0),
