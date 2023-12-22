@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:words/demo_blue.dart';
+import 'package:words/theme.dart';
 import 'package:words/login/login.dart';
 
 void main() async {
