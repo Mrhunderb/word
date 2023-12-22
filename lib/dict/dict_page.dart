@@ -23,69 +23,14 @@ class DictPage extends StatelessWidget {
 }
 
 List<Dict> dicts = [
-  Dict(
-    id: 1,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 1000,
-  ),
-  Dict(
-    id: 2,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 2000,
-  ),
-  Dict(
-    id: 3,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 3000,
-  ),
-  Dict(
-    id: 4,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 4000,
-  ),
-  Dict(
-    id: 5,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 5000,
-  ),
-  Dict(
-    id: 6,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 6000,
-  ),
-  Dict(
-    id: 6,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 7000,
-  ),
-  Dict(
-    id: 6,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 8000,
-  ),
-  Dict(
-    id: 6,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 9000,
-  ),
+  for (int i = 0; i < 20; i++)
+    Dict(
+      id: i,
+      dictName: '牛津高阶英汉双解词典',
+      coverUrl:
+          'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
+      totalWords: 1000,
+    ),
 ];
 
 List<DictItem> dictItems = dicts
