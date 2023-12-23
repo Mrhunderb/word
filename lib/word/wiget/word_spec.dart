@@ -31,25 +31,40 @@ class WordSpec extends StatelessWidget {
       ),
       WordItem(
         header: "释义",
-        content: [
-          Text(
-            word.definition,
-            style: const TextStyle(
-              fontSize: 16,
-            ),
-          )
-        ],
+        content: word.definition
+            .map(
+              (e) => Text(
+                e,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            )
+            .toList(),
       ),
       WordItem(
         header: "例句",
-        content: [
-          Text(
-            word.example,
-            style: const TextStyle(
-              fontSize: 16,
-            ),
+        content: List.generate(
+          word.enExample.length,
+          (index) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                word.enExample[index],
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                word.chExample[index],
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       const SizedBox(height: 24),
       Row(

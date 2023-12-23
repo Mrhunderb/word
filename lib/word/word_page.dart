@@ -16,20 +16,38 @@ class _WordPageState extends State<WordPage> {
   Word example1 = Word(
     word: 'example',
     pronunciation: 'ɪɡˈzæmpəl',
-    definition: 'n. 例子；范例；模范',
-    example: "This is an example. of the world's best example.",
+    definition: [
+      'n. 例子；范例；模范',
+      'n. 例子；范例；模范',
+    ],
+    enExample: [
+      "This is an example. of the world's best example.",
+      "This is an example. of the world's best example.",
+    ],
+    chExample: [
+      '这是世界上最好的例子。',
+      '这是世界上最好的例子。',
+    ],
   );
   Word example2 = Word(
-    word: 'exam',
+    word: 'example',
     pronunciation: 'ɪɡˈzæmpəl',
-    definition: 'n. 例子；范例；模范',
-    example: 'This is an example.',
+    definition: ['n. 例子；范例；模范'],
+    enExample: ["This is an example. of the world's best example."],
+    chExample: [
+      '这是世界上最好的例子。',
+      '这是世界上最好的例子。',
+    ],
   );
   Word example3 = Word(
-    word: 'acid',
+    word: 'example',
     pronunciation: 'ɪɡˈzæmpəl',
-    definition: 'n. 例子；范例；模范',
-    example: 'This is an example.',
+    definition: ['n. 例子；范例；模范'],
+    enExample: ["This is an example. of the world's best example."],
+    chExample: [
+      '这是世界上最好的例子。',
+      '这是世界上最好的例子。',
+    ],
   );
 
   void _next() {
