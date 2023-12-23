@@ -42,6 +42,19 @@ dependencies:
   flip_card: ^0.7.0
   audioplayers: ^5.2.1
   settings_ui: ^2.0.2
+  flutter_native_splash: ^2.3.7
+
+flutter_native_splash:
+  android: true
+  ios: false
+  web: false
+  color: "#42a5f5"
+  image: assets/icon.png
+
+  android_12:
+    image: assets/icon.png
+    color: "#FFFFFF"
+
 
 dev_dependencies:
   flutter_test:
