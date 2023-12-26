@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:words/collect/collect_page.dart';
+import 'package:words/login/login.dart';
 import 'package:words/user/widget/history_card.dart';
 
 class UserPage extends StatefulWidget {
@@ -64,7 +68,9 @@ class _UserPageState extends State<UserPage> {
       ListTile(
         leading: const Icon(Icons.bookmark),
         title: const Text('生词本'),
-        onTap: () {},
+        onTap: () {
+          Get.to(const CollectPage());
+        },
       ),
       ListTile(
         leading: const Icon(Icons.settings),
@@ -81,6 +87,7 @@ class _UserPageState extends State<UserPage> {
         onTap: () {
           // 处理注销逻辑
           // 可以弹出确认对话框，然后执行注销操作
+          Get.off(const LoginPage());
         },
       ),
       const SizedBox(height: 30),
