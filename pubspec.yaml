@@ -42,6 +42,8 @@ dependencies:
   flip_card: ^0.7.0
   audioplayers: ^5.2.1
   settings_ui: ^2.0.2
+  infinite_scroll_pagination: ^4.0.0
+  wheel_picker: ^0.0.4
   flutter_native_splash: ^2.3.7
 
 flutter_native_splash:
@@ -65,7 +67,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   flutter_launcher_icons: ^0.13.1
 
 flutter_launcher_icons:
