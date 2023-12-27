@@ -31,7 +31,11 @@ class ExamPage extends StatelessWidget {
   List<QuizContent> get quizContent {
     List<QuizContent> quizContent = [];
     for (int i = 0; i < quiz.length; i++) {
-      quizContent.add(QuizContent(quiz: quiz[i]));
+      quizContent.add(QuizContent(
+        quiz: quiz[i],
+        index: i,
+        total: quiz.length,
+      ));
     }
     return quizContent;
   }

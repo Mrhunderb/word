@@ -6,18 +6,29 @@ import 'package:words/word/wiget/word_card.dart';
 
 class WordView extends StatelessWidget {
   final Word word;
+  final int index;
+  final int total;
   final GlobalKey<FlipCardState> cardKey;
 
   const WordView({
     super.key,
     required this.word,
     required this.cardKey,
+    required this.index,
+    required this.total,
   });
 
   List<Widget> header() {
     return [
       Column(
         children: [
+          Text(
+            "${index + 1} / $total",
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.grey,
+            ),
+          ),
           Text(
             word.word,
             style: const TextStyle(

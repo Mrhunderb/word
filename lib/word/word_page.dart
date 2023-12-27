@@ -13,42 +13,35 @@ class WordPage extends StatefulWidget {
 class _WordPageState extends State<WordPage> {
   final PageController _controller = PageController();
 
-  Word example1 = Word(
-    word: 'example',
-    pronunciation: 'ɪɡˈzæmpəl',
-    definition: [
-      'n. 例子；范例；模范',
-      'n. 例子；范例；模范',
-    ],
-    enExample: [
-      "This is an example. of the world's best example.",
-      "This is an example. of the world's best example.",
-    ],
-    chExample: [
-      '这是世界上最好的例子。',
-      '这是世界上最好的例子。',
-    ],
-  );
-  Word example2 = Word(
-    word: 'example',
-    pronunciation: 'ɪɡˈzæmpəl',
-    definition: ['n. 例子；范例；模范'],
-    enExample: ["This is an example. of the world's best example."],
-    chExample: [
-      '这是世界上最好的例子。',
-      '这是世界上最好的例子。',
-    ],
-  );
-  Word example3 = Word(
-    word: 'example',
-    pronunciation: 'ɪɡˈzæmpəl',
-    definition: ['n. 例子；范例；模范'],
-    enExample: ["This is an example. of the world's best example."],
-    chExample: [
-      '这是世界上最好的例子。',
-      '这是世界上最好的例子。',
-    ],
-  );
+  List<Word> list = [
+    for (int i = 0; i < 50; i++)
+      Word(
+        word: 'example',
+        pronunciation: 'ɪɡˈzæmpəl',
+        definition: [
+          'n. 例子；范例；模范',
+          'n. 例子；范例；模范',
+        ],
+        enExample: [
+          "This is an example. of the world's best example.",
+          "This is an example. of the world's best example.",
+        ],
+        chExample: [
+          '这是世界上最好的例子。',
+          '这是世界上最好的例子。',
+        ],
+      ),
+  ];
+
+  late List<Widget> words = [
+    for (int i = 0; i < list.length; i++)
+      ViewSpec(
+        word: list[i],
+        index: i,
+        total: list.length,
+        next: _next,
+      ),
+  ];
 
   void _next() {
     _controller.nextPage(
@@ -56,12 +49,6 @@ class _WordPageState extends State<WordPage> {
       curve: Curves.easeInOut,
     );
   }
-
-  late List<Widget> words = [
-    ViewSpec(word: example1, next: _next),
-    ViewSpec(word: example2, next: _next),
-    ViewSpec(word: example3, next: _next),
-  ];
 
   @override
   Widget build(BuildContext context) {
