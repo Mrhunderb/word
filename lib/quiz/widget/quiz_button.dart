@@ -94,7 +94,7 @@ class _QuizButtonState extends State<QuizButton> {
                     ),
                     onPressed: () {
                       Get.to(
-                        CollectSpec(
+                        () => CollectSpec(
                           word: Word(
                             word: 'abandon',
                             pronunciation: 'əˈbændən',

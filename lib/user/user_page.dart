@@ -15,15 +15,16 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   List<Widget> pageConetnt() {
     return [
-      const Row(
+      Row(
         children: [
           CircleAvatar(
             radius: 45.0,
-            backgroundImage: NetworkImage(
-                'https://example.com/user_profile_image.jpg'), // 替换成用户头像的URL
+            backgroundColor: Theme.of(context).primaryColor,
+            // backgroundImage: NetworkImage(
+            //     'https://example.com/user_profile_image.jpg'), // 替换成用户头像的URL
           ),
-          SizedBox(width: 16.0),
-          Column(
+          const SizedBox(width: 16.0),
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -69,7 +70,7 @@ class _UserPageState extends State<UserPage> {
         leading: const Icon(Icons.bookmark),
         title: const Text('生词本'),
         onTap: () {
-          Get.to(const CollectPage());
+          Get.to(() => const CollectPage());
         },
       ),
       ListTile(

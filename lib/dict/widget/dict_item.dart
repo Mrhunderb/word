@@ -17,8 +17,7 @@ class DictItem extends StatelessWidget {
       widthFactor: 0.9,
       child: InkWell(
         onTap: () {
-          // Get.toNamed("/dict/detail", arguments: dict);
-          Get.to(const WordPage());
+          Get.to(() => const WordPage());
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

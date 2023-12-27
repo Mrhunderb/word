@@ -69,15 +69,21 @@ class _CollectPageState extends State<CollectPage> {
       ),
       body: Center(
         child: FractionallySizedBox(
-          widthFactor: 0.95,
+          widthFactor: 0.9,
           child: ListView.builder(
             itemCount: vocabulary.length,
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(vocabulary[index].word),
                 subtitle: Text(vocabulary[index].definition[0]),
+                trailing: IconButton(
+                  icon: const Icon(Icons.arrow_forward_ios),
+                  onPressed: () {
+                    Get.to(() => CollectSpec(word: vocabulary[index]));
+                  },
+                ),
                 onTap: () {
-                  Get.to(CollectSpec(word: vocabulary[index]));
+                  Get.to(() => CollectSpec(word: vocabulary[index]));
                 },
                 onLongPress: () {
                   _showDeleteConfirmationDialog(index);

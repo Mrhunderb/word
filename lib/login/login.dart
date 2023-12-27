@@ -66,7 +66,7 @@ class _LoginPage extends State<LoginPage> {
           buttonText: "注册",
           funcOnTap: () {
             Get.to(
-              const RegisterPage(),
+              () => const RegisterPage(),
               transition: Transition.downToUp,
             );
           },
