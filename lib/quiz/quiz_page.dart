@@ -7,60 +7,25 @@ class ExamPage extends StatelessWidget {
   final PageController pageController = Get.put(PageController());
 
   final List<Quiz> quiz = [
-    Quiz(
-      question:
-          'As we can no longer wait for the delivery of our order, we have to _______ it.',
-      options: [
-        'cancel',
-        'postpone',
-        'delay',
-        'suspend',
-      ],
-      meanings: [
-        '取消',
-        '推迟',
-        '延迟',
-        '暂停',
-      ],
-      correctOption: 1,
-      explanation: '句意：  订购的货物尚未送到， 我们不能再等了， 不得不取消订单。',
-    ),
-    Quiz(
-      question:
-          'As we can no longer wait for the delivery of our order, we have to _______ it.',
-      options: [
-        'cancel',
-        'postpone',
-        'delay',
-        'suspend',
-      ],
-      meanings: [
-        '取消',
-        '推迟',
-        '延迟',
-        '暂停',
-      ],
-      correctOption: 1,
-      explanation: '句意：  订购的货物尚未送到， 我们不能再等了， 不得不取消订单。',
-    ),
-    Quiz(
-      question:
-          'As we can no longer wait for the delivery of our order, we have to _______ it.',
-      options: [
-        'cancel',
-        'postpone',
-        'delay',
-        'suspend',
-      ],
-      meanings: [
-        '取消',
-        '推迟',
-        '延迟',
-        '暂停',
-      ],
-      correctOption: 1,
-      explanation: '句意：  订购的货物尚未送到， 我们不能再等了， 不得不取消订单。',
-    ),
+    for (int i = 0; i < 50; i++)
+      Quiz(
+        question:
+            'As we can no longer wait for the delivery of our order, we have to _______ it.',
+        options: [
+          'cancel',
+          'postpone',
+          'delay',
+          'suspend',
+        ],
+        meanings: [
+          '取消',
+          '推迟',
+          '延迟',
+          '暂停',
+        ],
+        correctOption: 1,
+        explanation: '句意：  订购的货物尚未送到， 我们不能再等了， 不得不取消订单。',
+      ),
   ];
 
   List<QuizContent> get quizContent {

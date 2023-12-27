@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:words/collect/widget/collect_spec.dart';
 import 'package:words/quiz/model/quiz.dart';
+import 'package:words/word/model/word.dart';
 
 class QuizButton extends StatefulWidget {
   final Quiz quiz;
@@ -64,7 +66,7 @@ class _QuizButtonState extends State<QuizButton> {
               ),
             ],
           );
-        }).toList(),
+        }),
         const SizedBox(height: 20),
         Text(
           selectedOption == 0
@@ -90,7 +92,25 @@ class _QuizButtonState extends State<QuizButton> {
                         const Size(125, 50),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(
+                        CollectSpec(
+                          word: Word(
+                            word: 'abandon',
+                            pronunciation: 'əˈbændən',
+                            definition: ['v. 放弃，抛弃'],
+                            enExample: [
+                              'He abandoned his family.',
+                              'He abandoned his family.'
+                            ],
+                            chExample: [
+                              '他抛弃了他的家人。',
+                              '他抛弃了他的家人。',
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                     child: const Text("单词详细"),
                   ),
                   const SizedBox(width: 60),
