@@ -3,6 +3,7 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/mydirct_page.dart';
+import 'package:words/plan/plan_page.dart';
 import 'package:words/quiz/quiz_page.dart';
 import 'package:words/home/widget/dict_progress.dart';
 import 'package:words/home/widget/hello.dart';
@@ -47,7 +48,9 @@ class HomeContent extends StatelessWidget {
               title: "今日计划",
               cardHeight: 205.0,
               content: planContent(),
-              funcOnTap: () {},
+              funcOnTap: () {
+                Get.to(() => PlanPage(dict: mydict));
+              },
             ),
             const SizedBox(height: 20),
             LearnButton(
