@@ -28,7 +28,7 @@ class _LoginPage extends State<LoginPage> {
     // TODO
     username.isEmpty;
     password.isEmpty;
-    Get.off(const HomePage());
+    Get.off(() => const HomePage());
   }
 
   Widget loginContent() {

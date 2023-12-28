@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:words/dict/model/dict.dart';
+import 'package:words/dict/mydirct_page.dart';
 import 'package:words/quiz/quiz_page.dart';
 import 'package:words/home/widget/dict_progress.dart';
 import 'package:words/home/widget/hello.dart';
@@ -10,7 +12,15 @@ import 'package:words/home/widget/plan.dart';
 import 'package:words/word/word_page.dart';
 
 class HomeContent extends StatelessWidget {
-  const HomeContent({super.key});
+  HomeContent({super.key});
+
+  final Dict mydict = Dict(
+    id: 1,
+    dictName: '牛津高阶英汉双解词典',
+    coverUrl:
+        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
+    totalWords: 1000,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +39,15 @@ class HomeContent extends StatelessWidget {
                 SizedBox(height: 8),
                 DictProgress(total: 100, achive: 45)
               ],
+              funcOnTap: () {
+                Get.to(() => MydictPage(dict: mydict));
+              },
             ),
             ItemCard(
               title: "今日计划",
               cardHeight: 205.0,
               content: planContent(),
+              funcOnTap: () {},
             ),
             const SizedBox(height: 20),
             LearnButton(

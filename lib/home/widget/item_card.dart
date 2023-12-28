@@ -4,6 +4,7 @@ import 'package:get/get_utils/get_utils.dart';
 class ItemCard extends StatelessWidget {
   final String title;
   final double cardHeight;
+  final Function funcOnTap;
   final List<Widget> content;
 
   final BorderRadius cardRadius = BorderRadius.circular(20.0);
@@ -12,6 +13,7 @@ class ItemCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.cardHeight,
+    required this.funcOnTap,
     required this.content,
   });
 
@@ -29,7 +31,9 @@ class ItemCard extends StatelessWidget {
         TextButton(
           onPressed: () {},
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              funcOnTap();
+            },
             child: const Text("查看详细"),
           ),
         )

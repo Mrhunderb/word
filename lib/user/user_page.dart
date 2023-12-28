@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:words/collect/collect_page.dart';
+import 'package:words/dict/model/dict.dart';
+import 'package:words/dict/mydirct_page.dart';
 import 'package:words/login/login.dart';
+import 'package:words/plan/plan_page.dart';
 import 'package:words/user/widget/history_card.dart';
 
 class UserPage extends StatefulWidget {
@@ -13,6 +16,14 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  Dict mydict = Dict(
+    id: 1,
+    dictName: '牛津高阶英汉双解词典',
+    coverUrl:
+        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
+    totalWords: 1000,
+  );
+
   List<Widget> pageConetnt() {
     return [
       Row(
@@ -59,12 +70,16 @@ class _UserPageState extends State<UserPage> {
       ListTile(
         leading: const Icon(Icons.book),
         title: const Text('我的词典'),
-        onTap: () {},
+        onTap: () {
+          Get.to(() => MydictPage(dict: mydict));
+        },
       ),
       ListTile(
         leading: const Icon(Icons.date_range),
         title: const Text('我的计划'),
-        onTap: () {},
+        onTap: () {
+          Get.to(() => const PlanPage());
+        },
       ),
       ListTile(
         leading: const Icon(Icons.bookmark),
@@ -88,7 +103,7 @@ class _UserPageState extends State<UserPage> {
         onTap: () {
           // 处理注销逻辑
           // 可以弹出确认对话框，然后执行注销操作
-          Get.off(const LoginPage());
+          Get.off(() => const LoginPage());
         },
       ),
       const SizedBox(height: 30),

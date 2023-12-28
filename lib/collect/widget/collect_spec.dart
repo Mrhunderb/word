@@ -70,7 +70,7 @@ class CollectSpec extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(word.word),
+        title: const Text("单词详细"),
         centerTitle: true,
       ),
       body: Center(
