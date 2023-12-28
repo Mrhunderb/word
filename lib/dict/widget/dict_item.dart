@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:words/dict/model/dict.dart';
-import 'package:words/word/word_page.dart';
+import 'package:words/dict/widget/dict_spec.dart';
+import 'package:words/plan/plan_page.dart';
 
 class DictItem extends StatelessWidget {
   final Dict dict;
@@ -17,7 +18,7 @@ class DictItem extends StatelessWidget {
       widthFactor: 0.9,
       child: InkWell(
         onTap: () {
-          Get.to(() => const WordPage());
+          Get.to(() => DictSpecPage(dict: dict));
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -52,11 +53,13 @@ class DictItem extends StatelessWidget {
                     Text("共 ${dict.totalWords} 词"),
                     const SizedBox(width: 25),
                     FilledButton(
-                      onPressed: () {},
                       child: const Text("学习"),
+                      onPressed: () {
+                        Get.to(() => PlanPage(dict: dict));
+                      },
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ],
