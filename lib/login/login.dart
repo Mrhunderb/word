@@ -3,11 +3,13 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
 import 'package:words/home/home.dart';
+import 'package:words/login/model/respon.dart';
 import 'package:words/login/register.dart';
 import 'package:words/login/widget/app_icon.dart';
 import 'package:words/login/widget/login_button.dart';
 import 'package:words/login/widget/login_hint.dart';
 import 'package:words/login/widget/login_input.dart';
+import 'package:words/net/api_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,13 +24,31 @@ class _LoginPage extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  void _showLoginErrorSnackBar(BuildContext context, String message) {
+    Get.snackbar(
+      "登陆失败",
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.red,
+      colorText: Colors.white,
+    );
+  }
+
   void login() {
     String username = _usernameController.text;
     String password = _passwordController.text;
-    // TODO
-    username.isEmpty;
-    password.isEmpty;
-    Get.off(() => const HomePage());
+    ApiService().loginUser(username, password).then((value) {
+      var respone = LoginResponse.fromJson(value.data);
+      if (respone.statusCode == 0) {
+        Get.off(() => const HomePage());
+      } else {
+        _showLoginErrorSnackBar(context, respone.statusMsg);
+      }
+    }).catchError(
+      (error) {
+        _showLoginErrorSnackBar(context, error.toString());
+      },
+    );
   }
 
   Widget loginContent() {
