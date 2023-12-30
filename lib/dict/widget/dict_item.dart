@@ -15,7 +15,7 @@ class DictItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      widthFactor: 0.9,
+      widthFactor: 0.95,
       child: InkWell(
         onTap: () {
           Get.to(() => DictSpecPage(dict: dict));
@@ -34,7 +34,7 @@ class DictItem extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 30),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

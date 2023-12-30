@@ -32,7 +32,6 @@ class _LoginHintState extends State<LoginHint> {
         ),
         GestureDetector(
           onTap: () {
-            // TODO
             widget.funcOnTap();
           },
           child: Text(

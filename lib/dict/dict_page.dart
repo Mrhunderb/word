@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/dict_item.dart';
-import 'package:words/net/api_service.dart';
+import 'package:words/utils/api_service.dart';
 
 class DictPage extends StatefulWidget {
   const DictPage({super.key});

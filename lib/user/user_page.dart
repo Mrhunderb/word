@@ -7,6 +7,7 @@ import 'package:words/dict/mydirct_page.dart';
 import 'package:words/login/login.dart';
 import 'package:words/plan/plan_page.dart';
 import 'package:words/user/widget/history_card.dart';
+import 'package:words/utils/preference.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -103,6 +104,7 @@ class _UserPageState extends State<UserPage> {
         onTap: () {
           // 处理注销逻辑
           // 可以弹出确认对话框，然后执行注销操作
+          prefs.clear();
           Get.off(() => const LoginPage());
         },
       ),
