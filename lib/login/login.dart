@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
 import 'package:words/home/home.dart';
 import 'package:words/login/model/respon.dart';
@@ -9,7 +8,9 @@ import 'package:words/login/widget/app_icon.dart';
 import 'package:words/login/widget/login_button.dart';
 import 'package:words/login/widget/login_hint.dart';
 import 'package:words/login/widget/login_input.dart';
-import 'package:words/net/api_service.dart';
+import 'package:words/utils/api_service.dart';
+
+import '../utils/preference.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -34,12 +35,19 @@ class _LoginPage extends State<LoginPage> {
     );
   }
 
-  void login() {
+  void login() async {
     String username = _usernameController.text;
     String password = _passwordController.text;
+    if (username.isEmpty || password.isEmpty) {
+      _showLoginErrorSnackBar(context, "用户名或密码不能为空");
+      return;
+    }
     ApiService().loginUser(username, password).then((value) {
       var respone = LoginResponse.fromJson(value.data);
       if (respone.statusCode == 0) {
+        setInt(Preference.userId, respone.userID);
+        setString(Preference.userName, username);
+        setString(Preference.password, password);
         Get.off(() => const HomePage());
       } else {
         _showLoginErrorSnackBar(context, respone.statusMsg);

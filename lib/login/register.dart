@@ -7,7 +7,7 @@ import 'package:words/login/widget/app_icon.dart';
 import 'package:words/login/widget/login_button.dart';
 import 'package:words/login/widget/login_hint.dart';
 import 'package:words/login/widget/login_input.dart';
-import 'package:words/net/api_service.dart';
+import 'package:words/utils/api_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
