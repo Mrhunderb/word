@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
 import 'package:words/login/model/respon.dart';
 import 'package:words/login/widget/app_icon.dart';
@@ -58,6 +56,13 @@ class _RegisterPageState extends State<RegisterPage> {
       var respone = LoginResponse.fromJson(value.data);
       if (respone.statusCode == 0) {
         Get.back();
+        Get.snackbar(
+          "注册成功",
+          "请登录",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
       } else {
         _showRegisterErrorSnackBar(context, respone.statusMsg);
       }
