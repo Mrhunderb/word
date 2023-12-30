@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:words/dict/model/dict.dart';
 
 class ApiService {
   Dio _dio;
@@ -33,6 +34,18 @@ class ApiService {
         'password': password,
       });
       return response;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<List<Dict>> getDictList() async {
+    try {
+      // 发送获取词典列表请求
+      Response response = await _dio.get('/dict/list/');
+      List<dynamic> dictsList = response.data['Dicts'];
+      List<Dict> dicts = dictsList.map((json) => Dict.fromJson(json)).toList();
+      return dicts;
     } catch (error) {
       rethrow;
     }
