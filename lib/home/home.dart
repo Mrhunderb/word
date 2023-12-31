@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   static final List<Widget> _pages = [
-    HomeContent(),
+    const HomeContent(),
     const DictPage(),
     const UserPage(),
   ];

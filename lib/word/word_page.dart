@@ -1,10 +1,23 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:words/utils/api_service.dart';
 import 'package:words/word/model/word.dart';
 import 'package:words/word/wiget/view_spec.dart';
 
 class WordPage extends StatefulWidget {
-  const WordPage({super.key});
+  final int dictId;
+  final int nLearn;
+  final int nReview;
+  final int type;
+  const WordPage({
+    super.key,
+    required this.dictId,
+    required this.nLearn,
+    required this.nReview,
+    required this.type,
+  });
 
   @override
   State<WordPage> createState() => _WordPageState();
@@ -12,36 +25,18 @@ class WordPage extends StatefulWidget {
 
 class _WordPageState extends State<WordPage> {
   final PageController _controller = PageController();
+  late Future<List<Word>> _wordFuture;
 
-  List<Word> list = [
-    for (int i = 0; i < 50; i++)
-      Word(
-        word: 'example',
-        pronunciation: 'ɪɡˈzæmpəl',
-        definition: [
-          'n. 例子；范例；模范',
-          'n. 例子；范例；模范',
-        ],
-        enExample: [
-          "This is an example. of the world's best example.",
-          "This is an example. of the world's best example.",
-        ],
-        chExample: [
-          '这是世界上最好的例子。',
-          '这是世界上最好的例子。',
-        ],
-      ),
-  ];
-
-  late List<Widget> words = [
-    for (int i = 0; i < list.length; i++)
-      ViewSpec(
-        word: list[i],
-        index: i,
-        total: list.length,
-        next: _next,
-      ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _wordFuture = ApiService().getWordTody(
+      widget.nLearn,
+      widget.nReview,
+      widget.type,
+      widget.dictId,
+    );
+  }
 
   void _next() {
     _controller.nextPage(
@@ -63,10 +58,39 @@ class _WordPageState extends State<WordPage> {
         title: const Text('背单词'),
         centerTitle: true, // Aligns the title in the middle
       ),
-      body: PageView(
-        controller: _controller,
-        physics: const NeverScrollableScrollPhysics(),
-        children: words,
+      body: FutureBuilder(
+        future: _wordFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (!snapshot.hasData) {
+            return const Center(
+              child: Text('No data available'),
+            );
+          } else {
+            List<Word> list = snapshot.data as List<Word>;
+            List<Widget> words = [
+              for (int i = 0; i < list.length; i++)
+                ViewSpec(
+                  word: list[i],
+                  index: i,
+                  total: list.length,
+                  next: _next,
+                ),
+            ];
+            return PageView(
+              controller: _controller,
+              physics: const NeverScrollableScrollPhysics(),
+              children: words,
+            );
+          }
+        },
       ),
     );
   }

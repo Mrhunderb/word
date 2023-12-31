@@ -6,12 +6,15 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/progress.dart';
 import 'package:words/home/widget/learn_button.dart';
+import 'package:words/plan/model/plan.dart';
 
 class PlanPage extends StatefulWidget {
   final Dict dict;
+  final Plan? plan;
   const PlanPage({
     super.key,
     required this.dict,
+    this.plan,
   });
 
   @override
@@ -19,11 +22,17 @@ class PlanPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<PlanPage> {
+  List<String> mode = ['按字母表顺序', '按字母表倒序', '乱序'];
   String currentOrder = '按字母表顺序';
-  String currentDailyLearn = '20';
-  String currentDailyReview = '10';
-  int _nLearn = 5;
-  int _nReview = 5;
+  late int _nLearn;
+  late int _nReview;
+
+  @override
+  void initState() {
+    super.initState();
+    _nLearn = widget.plan!.nLearn;
+    _nReview = widget.plan!.nReview;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,20 +72,20 @@ class _MyPageState extends State<PlanPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const SizedBox(
+                    SizedBox(
                       height: 30,
                       width: 200,
                       child: GeneralProgress(
-                        achive: 50,
-                        total: 100,
+                        achive: widget.plan!.progress,
+                        total: widget.dict.totalWords,
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Row(
+                    Row(
                       children: [
                         Text(
-                          '50/100词',
-                          style: TextStyle(
+                          '${widget.plan!.progress}/${widget.dict.totalWords}词',
+                          style: const TextStyle(
                             fontSize: 11,
                             color: Colors.grey,
                           ),
@@ -94,7 +103,8 @@ class _MyPageState extends State<PlanPage> {
             ),
             CustomDropdown<String>(
               hintText: "请选择学习顺序",
-              items: const <String>['按字母表顺序', '按字母表倒序', '乱序'],
+              items: mode,
+              initialItem: mode[widget.plan!.mode],
               onChanged: (String? newValue) {
                 setState(() {
                   currentOrder = newValue!;
@@ -137,7 +147,7 @@ class _MyPageState extends State<PlanPage> {
                     NumberPicker(
                       value: _nReview,
                       minValue: 1,
-                      maxValue: 100,
+                      maxValue: 200,
                       selectedTextStyle: TextStyle(
                         fontSize: 26,
                         color: Theme.of(context).primaryColor,

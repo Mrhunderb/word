@@ -47,6 +47,7 @@ class WordSpec extends StatelessWidget {
         content: List.generate(
           word.enExample.length,
           (index) => Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(

@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:words/dict/model/dict.dart';
+import 'package:words/plan/model/plan.dart';
+import 'package:words/user/model/user.dart';
+import 'package:words/word/model/word.dart';
 
 class ApiService {
   Dio _dio;
@@ -46,6 +49,60 @@ class ApiService {
       List<dynamic> dictsList = response.data['Dicts'];
       List<Dict> dicts = dictsList.map((json) => Dict.fromJson(json)).toList();
       return dicts;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<User> getUser(int userID) async {
+    try {
+      // 发送获取用户信息请求
+      Response response =
+          await _dio.get('/user/info/', queryParameters: {'user_id': userID});
+      User user = User.fromJson(response.data['User']);
+      return user;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<Plan> getPlan(int userID) async {
+    try {
+      // 发送获取用户计划请求
+      Response response =
+          await _dio.get('/plan/', queryParameters: {'user_id': userID});
+      Plan plan = Plan.fromJson(response.data['Plan']);
+      return plan;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<Dict> getDict(int dictID) async {
+    try {
+      // 发送获取词典信息请求
+      Response response =
+          await _dio.get('/dict/', queryParameters: {'dict_id': dictID});
+      Dict dict = Dict.fromJson(response.data['Dict']);
+      return dict;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<List<Word>> getWordTody(
+      int nLearn, int nReview, int type, int dictID) async {
+    try {
+      // 发送获取今日单词请求
+      Response response = await _dio.get('/word/today/', queryParameters: {
+        'n_learn': nLearn,
+        'n_review': nReview,
+        'type': type,
+        'dict_id': dictID,
+      });
+      List<dynamic> wordsList = response.data['Words'];
+      List<Word> words = wordsList.map((json) => Word.fromJson(json)).toList();
+      return words;
     } catch (error) {
       rethrow;
     }
