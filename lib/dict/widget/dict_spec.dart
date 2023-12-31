@@ -3,6 +3,7 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:words/collect/widget/collect_spec.dart';
 import 'package:words/dict/model/dict.dart';
+import 'package:words/quiz/model/quiz.dart';
 import 'package:words/word/model/word.dart';
 
 class DictSpecPage extends StatefulWidget {
@@ -25,6 +26,16 @@ class _DictSpecPage extends State<DictSpecPage> {
         definition: ['v. 放弃，抛弃'],
         enExample: ['He abandoned his family.', 'He abandoned his family.'],
         chExample: ['他抛弃了他的家人。', '他抛弃了他的家人。'],
+        quiz: Quiz(
+          id: 1,
+          options: [
+            'cancel',
+            'postpone',
+            'delay',
+            'suspend',
+          ],
+          correctOption: 1,
+        ),
       ),
     // Add more words here
   ];

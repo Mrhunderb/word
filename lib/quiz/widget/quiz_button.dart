@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:words/collect/widget/collect_spec.dart';
-import 'package:words/quiz/model/quiz.dart';
 import 'package:words/word/model/word.dart';
 
 class QuizButton extends StatefulWidget {
-  final Quiz quiz;
+  final Word word;
 
   const QuizButton({
     super.key,
-    required this.quiz,
+    required this.word,
   });
 
   @override
@@ -27,10 +26,10 @@ class _QuizButtonState extends State<QuizButton> {
         ...List.generate(4, (index) => index + 1).map((option) {
           Color color;
           if (selectedOption == option) {
-            color = option == widget.quiz.correctOption
+            color = option == widget.word.quiz.correctOption
                 ? const Color.fromARGB(255, 76, 175, 132)
                 : const Color.fromARGB(255, 252, 118, 111);
-          } else if (option == widget.quiz.correctOption &&
+          } else if (option == widget.word.quiz.correctOption &&
               selectedOption != 0) {
             color = const Color.fromARGB(255, 76, 175, 132);
           } else {
@@ -44,7 +43,7 @@ class _QuizButtonState extends State<QuizButton> {
                 style: FilledButton.styleFrom(
                   backgroundColor: color,
                   foregroundColor: Colors.black,
-                  minimumSize: const Size(double.infinity, 70),
+                  minimumSize: const Size(double.infinity, 78),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -57,11 +56,9 @@ class _QuizButtonState extends State<QuizButton> {
                   }
                 },
                 child: Text(
-                  // widget.quiz.options[option - 1],
-                  selectedOption == 0
-                      ? widget.quiz.options[option - 1]
-                      : "${widget.quiz.options[option - 1]} ${widget.quiz.meanings[option - 1]}",
-                  style: const TextStyle(fontSize: 20),
+                  // widget.word.quiz.options[option - 1],
+                  widget.word.quiz.options[option - 1],
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ],
@@ -71,15 +68,11 @@ class _QuizButtonState extends State<QuizButton> {
         Text(
           selectedOption == 0
               ? '请选择正确选项'
-              : selectedOption == widget.quiz.correctOption
+              : selectedOption == widget.word.quiz.correctOption
                   ? '恭喜你答对了!'
                   : '很遗憾答错了.',
         ),
-        const SizedBox(height: 20),
-        Text(
-          selectedOption == 0 ? "" : widget.quiz.explanation,
-        ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 40),
         selectedOption == 0
             ? const SizedBox()
             : Row(
@@ -95,19 +88,7 @@ class _QuizButtonState extends State<QuizButton> {
                     onPressed: () {
                       Get.to(
                         () => CollectSpec(
-                          word: Word(
-                            word: 'abandon',
-                            pronunciation: 'əˈbændən',
-                            definition: ['v. 放弃，抛弃'],
-                            enExample: [
-                              'He abandoned his family.',
-                              'He abandoned his family.'
-                            ],
-                            chExample: [
-                              '他抛弃了他的家人。',
-                              '他抛弃了他的家人。',
-                            ],
-                          ),
+                          word: widget.word,
                         ),
                       );
                     },
@@ -128,7 +109,7 @@ class _QuizButtonState extends State<QuizButton> {
                       },
                       child: const Text("下一题")),
                 ],
-              )
+              ),
       ],
     );
   }

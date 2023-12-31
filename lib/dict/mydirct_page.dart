@@ -4,6 +4,7 @@ import 'package:words/dict/dict_page.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/progress.dart';
 import 'package:words/home/widget/learn_button.dart';
+import 'package:words/quiz/model/quiz.dart';
 import 'package:words/word/model/word.dart';
 
 class MydictPage extends StatefulWidget {
@@ -28,6 +29,16 @@ class _MydictPageState extends State<MydictPage> {
         definition: ['v. 放弃，抛弃'],
         enExample: ['He abandoned his family.', 'He abandoned his family.'],
         chExample: ['他抛弃了他的家人。', '他抛弃了他的家人。'],
+        quiz: Quiz(
+          id: 1,
+          options: [
+            'cancel',
+            'postpone',
+            'delay',
+            'suspend',
+          ],
+          correctOption: 1,
+        ),
       ),
     // Add more words here
   ];

@@ -1,53 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:words/quiz/model/quiz.dart';
 import 'package:words/quiz/widget/quiz_content.dart';
+import 'package:words/utils/api_service.dart';
+import 'package:words/word/model/word.dart';
 
 class ExamPage extends StatelessWidget {
   final PageController pageController = Get.put(PageController());
+  final int planID;
 
-  final List<Quiz> quiz = [
-    for (int i = 0; i < 50; i++)
-      Quiz(
-        question:
-            'As we can no longer wait for the delivery of our order, we have to _______ it.',
-        options: [
-          'cancel',
-          'postpone',
-          'delay',
-          'suspend',
-        ],
-        meanings: [
-          '取消',
-          '推迟',
-          '延迟',
-          '暂停',
-        ],
-        correctOption: 1,
-        explanation: '句意：  订购的货物尚未送到， 我们不能再等了， 不得不取消订单。',
-      ),
-  ];
-
-  List<QuizContent> get quizContent {
-    List<QuizContent> quizContent = [];
-    for (int i = 0; i < quiz.length; i++) {
-      quizContent.add(QuizContent(
-        quiz: quiz[i],
-        index: i,
-        total: quiz.length,
-      ));
-    }
-    return quizContent;
+  Future<List<Word>> _getWord() async {
+    List<Word> word = await ApiService().getWordTody(1);
+    return word;
   }
 
-  // void _next() {
-  //   pageController.nextPage(
-  //     duration: const Duration(milliseconds: 300),
-  //     curve: Curves.easeInOut,
-  //   );
-  // }
-
-  ExamPage({super.key});
+  ExamPage({
+    super.key,
+    required this.planID,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +31,30 @@ class ExamPage extends StatelessWidget {
         title: const Text('测试'),
         centerTitle: true,
       ),
-      body: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: quizContent,
+      body: FutureBuilder(
+        future: _getWord(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<Word> words = snapshot.data as List<Word>;
+            List<QuizContent> quizContent = [
+              for (int i = 0; i < words.length; i++)
+                QuizContent(
+                  word: words[i],
+                  index: i,
+                  total: words.length,
+                ),
+            ];
+            return PageView(
+              controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: quizContent,
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

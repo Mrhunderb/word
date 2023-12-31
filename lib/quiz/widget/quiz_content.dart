@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:words/quiz/model/quiz.dart';
 import 'package:words/quiz/widget/quiz_button.dart';
+import 'package:words/word/model/word.dart';
 
 class QuizContent extends StatelessWidget {
   final int index;
   final int total;
-  final Quiz quiz;
+  final Word word;
   const QuizContent({
     super.key,
     required this.index,
     required this.total,
-    required this.quiz,
+    required this.word,
   });
 
   @override
@@ -22,18 +23,19 @@ class QuizContent extends StatelessWidget {
           children: [
             const SizedBox(height: 40),
             Text(
-              'Question ${index + 1} / $total',
-              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              'question ${index + 1} / $total',
+              style: const TextStyle(fontSize: 18),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             Center(
               child: Text(
-                quiz.question,
-                style: const TextStyle(fontSize: 22),
+                word.word,
+                style:
+                    const TextStyle(fontSize: 32, fontWeight: FontWeight.w900),
               ),
             ),
-            const SizedBox(height: 20),
-            QuizButton(quiz: quiz),
+            const SizedBox(height: 50),
+            QuizButton(word: word),
           ],
         ),
       ),

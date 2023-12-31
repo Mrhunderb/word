@@ -1,15 +1,25 @@
 class Quiz {
-  String question;
+  int id;
   List<String> options;
-  List<String> meanings;
   int correctOption;
-  String explanation;
 
   Quiz({
-    required this.question,
+    required this.id,
     required this.options,
-    required this.meanings,
     required this.correctOption,
-    required this.explanation,
   });
+
+  factory Quiz.fromJson(Map<String, dynamic> json) {
+    List<String> options = [
+      json['OptionA'],
+      json['OptionB'],
+      json['OptionC'],
+      json['OptionD'],
+    ];
+    return Quiz(
+      id: json['QuizID'],
+      options: options,
+      correctOption: json['CorrectOption'],
+    );
+  }
 }

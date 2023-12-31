@@ -53,7 +53,7 @@ class HomeContent extends StatelessWidget {
                         const SizedBox(height: 20),
                         ItemCard(
                           title: "我的词典",
-                          cardHeight: 155.0,
+                          cardHeight: 160.0,
                           content: [
                             Text(
                               mydict!.dictName,
@@ -90,7 +90,7 @@ class HomeContent extends StatelessWidget {
                         LearnButton(
                           buttonText: "开始测试",
                           funcOnTap: () {
-                            Get.to(() => ExamPage());
+                            Get.to(() => ExamPage(planID: plan.planID));
                           },
                         ),
                       ],
