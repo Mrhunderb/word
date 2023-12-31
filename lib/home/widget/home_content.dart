@@ -67,7 +67,8 @@ class HomeContent extends StatelessWidget {
                                 total: mydict.totalWords, achive: plan.progress)
                           ],
                           funcOnTap: () {
-                            Get.to(() => MydictPage(dict: mydict));
+                            Get.to(() => MydictPage(
+                                dict: mydict, progress: plan.progress));
                           },
                         ),
                         ItemCard(
@@ -82,14 +83,7 @@ class HomeContent extends StatelessWidget {
                         LearnButton(
                           buttonText: "开始背单词",
                           funcOnTap: () {
-                            Get.to(
-                              () => WordPage(
-                                dictId: plan.dictID,
-                                nLearn: plan.nLearn,
-                                nReview: plan.nLearn,
-                                type: plan.mode,
-                              ),
-                            );
+                            Get.to(() => WordPage(planId: plan.planID));
                           },
                         ),
                         const SizedBox(height: 25),
@@ -106,13 +100,17 @@ class HomeContent extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
-              return const CircularProgressIndicator();
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             },
           );
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");
         }
-        return const CircularProgressIndicator();
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

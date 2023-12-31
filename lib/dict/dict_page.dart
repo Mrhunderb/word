@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/dict_item.dart';
+import 'package:words/plan/model/plan.dart';
 import 'package:words/utils/api_service.dart';
 
 class DictPage extends StatefulWidget {
@@ -12,11 +13,13 @@ class DictPage extends StatefulWidget {
 
 class _DictPageState extends State<DictPage> {
   late Future<List<Dict>> _dictFuture;
+  late Future<Plan> _planFuture;
 
   @override
   void initState() {
     super.initState();
     _dictFuture = ApiService().getDictList();
+    _planFuture = ApiService().getPlan(2);
   }
 
   @override
@@ -26,8 +29,8 @@ class _DictPageState extends State<DictPage> {
         title: const Text('词典列表'),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<Dict>>(
-        future: _dictFuture,
+      body: FutureBuilder<List<dynamic>>(
+        future: Future.wait([_dictFuture, _planFuture]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -42,13 +45,15 @@ class _DictPageState extends State<DictPage> {
               child: Text('No data available'),
             );
           } else {
+            List<Dict> dicts = snapshot.data![0];
+            Plan plan = snapshot.data![1];
             return ListView(
               children: [
                 const SizedBox(height: 10),
                 Column(
                   children: List<DictItem>.generate(
-                    snapshot.data!.length,
-                    (index) => DictItem(dict: snapshot.data![index]),
+                    dicts.length,
+                    (index) => DictItem(dict: dicts[index], plan: plan),
                   ),
                 ),
               ],

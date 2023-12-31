@@ -26,12 +26,20 @@ class _MyPageState extends State<PlanPage> {
   String currentOrder = '按字母表顺序';
   late int _nLearn;
   late int _nReview;
+  late int _progress;
 
   @override
   void initState() {
     super.initState();
-    _nLearn = widget.plan!.nLearn;
-    _nReview = widget.plan!.nReview;
+    if (widget.plan == null) {
+      _nLearn = 30;
+      _nReview = 30;
+      _progress = 0;
+    } else {
+      _nLearn = widget.plan!.nLearn;
+      _nReview = widget.plan!.nReview;
+      _progress = widget.plan!.progress;
+    }
   }
 
   @override
@@ -42,7 +50,7 @@ class _MyPageState extends State<PlanPage> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,6 +58,7 @@ class _MyPageState extends State<PlanPage> {
               '所选词典',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -76,7 +85,7 @@ class _MyPageState extends State<PlanPage> {
                       height: 30,
                       width: 200,
                       child: GeneralProgress(
-                        achive: widget.plan!.progress,
+                        achive: _progress,
                         total: widget.dict.totalWords,
                       ),
                     ),
@@ -84,7 +93,7 @@ class _MyPageState extends State<PlanPage> {
                     Row(
                       children: [
                         Text(
-                          '${widget.plan!.progress}/${widget.dict.totalWords}词',
+                          '$_progress/${widget.dict.totalWords}词',
                           style: const TextStyle(
                             fontSize: 11,
                             color: Colors.grey,
@@ -96,15 +105,16 @@ class _MyPageState extends State<PlanPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             const Text(
               '背词模式',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 20),
             CustomDropdown<String>(
               hintText: "请选择学习顺序",
               items: mode,
-              initialItem: mode[widget.plan!.mode],
+              initialItem: widget.plan == null ? null : mode[widget.plan!.mode],
               onChanged: (String? newValue) {
                 setState(() {
                   currentOrder = newValue!;
@@ -158,7 +168,7 @@ class _MyPageState extends State<PlanPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             LearnButton(
               buttonText: "保存修改",
               funcOnTap: () {

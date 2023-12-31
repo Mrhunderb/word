@@ -7,16 +7,10 @@ import 'package:words/word/model/word.dart';
 import 'package:words/word/wiget/view_spec.dart';
 
 class WordPage extends StatefulWidget {
-  final int dictId;
-  final int nLearn;
-  final int nReview;
-  final int type;
+  final int planId;
   const WordPage({
     super.key,
-    required this.dictId,
-    required this.nLearn,
-    required this.nReview,
-    required this.type,
+    required this.planId,
   });
 
   @override
@@ -30,12 +24,7 @@ class _WordPageState extends State<WordPage> {
   @override
   void initState() {
     super.initState();
-    _wordFuture = ApiService().getWordTody(
-      widget.nLearn,
-      widget.nReview,
-      widget.type,
-      widget.dictId,
-    );
+    _wordFuture = ApiService().getWordTody(widget.planId);
   }
 
   void _next() {

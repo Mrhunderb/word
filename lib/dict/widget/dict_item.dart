@@ -3,13 +3,16 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/dict_spec.dart';
+import 'package:words/plan/model/plan.dart';
 import 'package:words/plan/plan_page.dart';
 
 class DictItem extends StatelessWidget {
   final Dict dict;
+  final Plan plan;
   const DictItem({
     super.key,
     required this.dict,
+    required this.plan,
   });
 
   @override
@@ -52,12 +55,20 @@ class DictItem extends StatelessWidget {
                   children: [
                     Text("共 ${dict.totalWords} 词"),
                     const SizedBox(width: 25),
-                    FilledButton(
-                      child: const Text("学习"),
-                      onPressed: () {
-                        Get.to(() => PlanPage(dict: dict));
-                      },
-                    ),
+                    plan.dictID == dict.id
+                        ? FilledButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.grey),
+                            ),
+                            child: const Text('在学'))
+                        : FilledButton(
+                            child: const Text('学习'),
+                            onPressed: () {
+                              Get.to(() => PlanPage(dict: dict));
+                            },
+                          ),
                   ],
                 ),
               ],

@@ -72,7 +72,7 @@ class _UserPageState extends State<UserPage> {
         leading: const Icon(Icons.book),
         title: const Text('我的词典'),
         onTap: () {
-          Get.to(() => MydictPage(dict: mydict));
+          Get.to(() => MydictPage(dict: mydict, progress: 50));
         },
       ),
       ListTile(

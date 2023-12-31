@@ -90,16 +90,11 @@ class ApiService {
     }
   }
 
-  Future<List<Word>> getWordTody(
-      int nLearn, int nReview, int type, int dictID) async {
+  Future<List<Word>> getWordTody(int planID) async {
     try {
       // 发送获取今日单词请求
-      Response response = await _dio.get('/word/today/', queryParameters: {
-        'n_learn': nLearn,
-        'n_review': nReview,
-        'type': type,
-        'dict_id': dictID,
-      });
+      Response response =
+          await _dio.get('/word/today/', queryParameters: {'plan_id': planID});
       List<dynamic> wordsList = response.data['Words'];
       List<Word> words = wordsList.map((json) => Word.fromJson(json)).toList();
       return words;

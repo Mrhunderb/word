@@ -8,9 +8,11 @@ import 'package:words/word/model/word.dart';
 
 class MydictPage extends StatefulWidget {
   final Dict dict;
+  final int progress;
   const MydictPage({
     super.key,
     required this.dict,
+    required this.progress,
   });
 
   @override
@@ -52,20 +54,20 @@ class _MydictPageState extends State<MydictPage> {
               ),
             ),
             const SizedBox(height: 20),
-            const SizedBox(
+            SizedBox(
               height: 30,
               width: 200,
               child: GeneralProgress(
-                achive: 50,
-                total: 100,
+                achive: widget.progress,
+                total: widget.dict.totalWords,
               ),
             ),
             const SizedBox(height: 20),
-            const Row(
+            Row(
               children: [
                 Text(
-                  '50/100词',
-                  style: TextStyle(
+                  '${widget.progress}/${widget.dict.totalWords}词',
+                  style: const TextStyle(
                     fontSize: 11,
                     color: Colors.grey,
                   ),
