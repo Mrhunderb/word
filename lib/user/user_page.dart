@@ -5,8 +5,10 @@ import 'package:words/collect/collect_page.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/mydirct_page.dart';
 import 'package:words/login/login.dart';
+import 'package:words/plan/model/plan.dart';
 import 'package:words/plan/plan_page.dart';
 import 'package:words/user/widget/history_card.dart';
+import 'package:words/utils/api_service.dart';
 import 'package:words/utils/preference.dart';
 
 class UserPage extends StatefulWidget {
@@ -17,13 +19,23 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  Dict mydict = Dict(
-    id: 1,
-    dictName: '牛津高阶英汉双解词典',
-    coverUrl:
-        'https://nos.netease.com/ydschool-online/1496632727200CET4luan_1.jpg',
-    totalWords: 1000,
-  );
+  final String username = getString(Preference.userName);
+  final int userId = getInt(Preference.userId);
+  late Plan plan;
+  late Dict mydict;
+
+  Future<Plan> _fetchUser() async {
+    // 获取用户信息
+    int userId = getInt(Preference.userId);
+    Future<Plan> plan = ApiService().getPlan(userId);
+    return plan;
+  }
+
+  Future<Dict> _fechDict(int dictID) async {
+    // 获取词典信息
+    Future<Dict> dict = ApiService().getDict(dictID);
+    return dict;
+  }
 
   List<Widget> pageConetnt() {
     return [
@@ -35,21 +47,21 @@ class _UserPageState extends State<UserPage> {
             // backgroundImage: NetworkImage(
             //     'https://example.com/user_profile_image.jpg'), // 替换成用户头像的URL
           ),
-          const SizedBox(width: 16.0),
-          const Column(
+          const SizedBox(width: 40.0),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'John Doe', // 替换成用户的姓名
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
+                username, // 替换成用户的姓名
+                style: const TextStyle(
+                  fontSize: 28.0,
+                  fontWeight: FontWeight.w900,
                 ),
               ),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               Text(
-                'john.doe@example.com', // 替换成用户的邮箱
-                style: TextStyle(
+                'ID: $userId', // 替换成用户的邮箱
+                style: const TextStyle(
                   fontSize: 16.0,
                   color: Colors.grey,
                 ),
@@ -72,14 +84,14 @@ class _UserPageState extends State<UserPage> {
         leading: const Icon(Icons.book),
         title: const Text('我的词典'),
         onTap: () {
-          Get.to(() => MydictPage(dict: mydict, progress: 50));
+          Get.to(() => MydictPage(dict: mydict, progress: plan.progress));
         },
       ),
       ListTile(
         leading: const Icon(Icons.date_range),
         title: const Text('我的计划'),
         onTap: () {
-          // Get.to(() => PlanPage(dict: mydict, plan: ));
+          Get.to(() => PlanPage(dict: mydict, plan: plan));
         },
       ),
       ListTile(
@@ -116,12 +128,31 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Center(
       child: FractionallySizedBox(
-        widthFactor: 0.9,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: pageConetnt(),
-        ),
-      ),
+          widthFactor: 0.9,
+          child: FutureBuilder(
+            future: _fetchUser(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                plan = snapshot.data!;
+                return FutureBuilder(
+                  future: _fechDict(plan.dictID),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      mydict = snapshot.data!;
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: pageConetnt(),
+                      );
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          )),
     );
   }
 }
