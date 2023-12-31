@@ -9,7 +9,7 @@ class ExamPage extends StatelessWidget {
   final int planID;
 
   Future<List<Word>> _getWord() async {
-    List<Word> word = await ApiService().getWordTody(1);
+    List<Word> word = await ApiService().getWordTody(planID);
     return word;
   }
 

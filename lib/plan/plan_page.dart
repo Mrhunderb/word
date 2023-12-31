@@ -26,7 +26,7 @@ class PlanPage extends StatefulWidget {
 
 class _MyPageState extends State<PlanPage> {
   List<String> mode = ['按字母表顺序', '按字母表倒序', '乱序'];
-  String currentOrder = '按字母表顺序';
+  String currentOrder = '无';
   late int _nLearn;
   late int _nReview;
   late int _progress;
@@ -43,6 +43,16 @@ class _MyPageState extends State<PlanPage> {
       _nReview = widget.plan!.nReview;
       _progress = widget.plan!.progress;
     }
+  }
+
+  void _showErrorSnackBar(BuildContext context, String message) {
+    Get.snackbar(
+      "保存失败",
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.red,
+      colorText: Colors.white,
+    );
   }
 
   @override
@@ -117,7 +127,8 @@ class _MyPageState extends State<PlanPage> {
             CustomDropdown<String>(
               hintText: "请选择学习顺序",
               items: mode,
-              initialItem: widget.plan == null ? null : mode[widget.plan!.mode],
+              initialItem:
+                  widget.plan == null ? null : mode[widget.plan!.mode - 1],
               onChanged: (String? newValue) {
                 setState(() {
                   currentOrder = newValue!;
@@ -175,15 +186,16 @@ class _MyPageState extends State<PlanPage> {
             LearnButton(
               buttonText: "保存修改",
               funcOnTap: () {
-                setState(() {
-                  _progress = 0;
-                });
-                ApiService()
-                    .changePlan(getInt(Preference.userId), widget.dict.id,
-                        mode.indexOf(currentOrder), _nLearn, _nReview)
-                    .then((value) {
-                  Get.off(() => const HomePage());
-                });
+                if (!mode.contains(currentOrder)) {
+                  _showErrorSnackBar(context, "请选择学习顺序");
+                } else {
+                  ApiService()
+                      .changePlan(getInt(Preference.userId), widget.dict.id,
+                          mode.indexOf(currentOrder) + 1, _nLearn, _nReview)
+                      .then((value) {
+                    Get.off(() => const HomePage());
+                  });
+                }
               },
             ),
           ],
