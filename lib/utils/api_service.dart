@@ -117,4 +117,17 @@ class ApiService {
       rethrow;
     }
   }
+
+  Future<List<Word>> getUserCollect(int userID) async {
+    try {
+      // 发送获取用户收藏单词请求
+      Response response = await _dio
+          .get('/user/collect/', queryParameters: {'user_id': userID});
+      List<dynamic> wordsList = response.data['Words'];
+      List<Word> words = wordsList.map((json) => Word.fromJson(json)).toList();
+      return words;
+    } catch (error) {
+      rethrow;
+    }
+  }
 }
