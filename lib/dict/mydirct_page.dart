@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:words/dict/dict_page.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/progress.dart';
+import 'package:words/dict/widget/word_list.dart';
 import 'package:words/home/widget/learn_button.dart';
 import 'package:words/quiz/model/quiz.dart';
 import 'package:words/word/model/word.dart';
@@ -126,16 +127,7 @@ class _MydictPageState extends State<MydictPage> {
               const SizedBox(height: 10),
               _dictContent(),
               Expanded(
-                child: ListView.builder(
-                  itemCount: vocabulary.length,
-                  itemBuilder: (context, index) {
-                    final word = vocabulary[index];
-                    return ListTile(
-                      title: Text(word.word),
-                      subtitle: Text(word.definition.join(', ')),
-                    );
-                  },
-                ),
+                child: WordList(dict: widget.dict),
               ),
               LearnButton(
                 buttonText: "更换词书",

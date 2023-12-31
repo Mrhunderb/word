@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:words/collect/widget/collect_spec.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/word_list.dart';
-import 'package:words/quiz/model/quiz.dart';
-import 'package:words/word/model/word.dart';
 
 class DictSpecPage extends StatefulWidget {
   final Dict dict;
