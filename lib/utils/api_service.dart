@@ -102,4 +102,19 @@ class ApiService {
       rethrow;
     }
   }
+
+  Future<List<Word>> getAllWord(int dictID, int offset) async {
+    try {
+      // 发送获取全部单词请求
+      Response response = await _dio.get('/word/all/', queryParameters: {
+        'dict_id': dictID,
+        'offset': offset,
+      });
+      List<dynamic> wordsList = response.data['Words'];
+      List<Word> words = wordsList.map((json) => Word.fromJson(json)).toList();
+      return words;
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

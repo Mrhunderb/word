@@ -3,6 +3,7 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/dict_spec.dart';
+import 'package:words/dict/widget/word_list.dart';
 import 'package:words/plan/model/plan.dart';
 import 'package:words/plan/plan_page.dart';
 
