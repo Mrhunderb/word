@@ -5,8 +5,11 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/progress.dart';
+import 'package:words/home/home.dart';
 import 'package:words/home/widget/learn_button.dart';
 import 'package:words/plan/model/plan.dart';
+import 'package:words/utils/api_service.dart';
+import 'package:words/utils/preference.dart';
 
 class PlanPage extends StatefulWidget {
   final Dict dict;
@@ -172,8 +175,15 @@ class _MyPageState extends State<PlanPage> {
             LearnButton(
               buttonText: "保存修改",
               funcOnTap: () {
-                //TODO: save the plan
-                Get.back();
+                setState(() {
+                  _progress = 0;
+                });
+                ApiService()
+                    .changePlan(getInt(Preference.userId), widget.dict.id,
+                        mode.indexOf(currentOrder), _nLearn, _nReview)
+                    .then((value) {
+                  Get.off(() => const HomePage());
+                });
               },
             ),
           ],

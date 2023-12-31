@@ -74,7 +74,7 @@ class HomeContent extends StatelessWidget {
                         ItemCard(
                           title: "今日计划",
                           cardHeight: 205.0,
-                          content: planContent(plan.nLearn),
+                          content: planContent(plan),
                           funcOnTap: () {
                             Get.to(() => PlanPage(dict: mydict, plan: plan));
                           },

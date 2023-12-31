@@ -130,4 +130,32 @@ class ApiService {
       rethrow;
     }
   }
+
+  Future<Response> addCollect(int userID, int wordID) async {
+    try {
+      // 发送添加收藏单词请求
+      Response response = await _dio.post('/user/collect/add/',
+          queryParameters: {'user_id': userID, 'word_id': wordID});
+      return response;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<Response> changePlan(
+      int userID, int dictID, int mode, int nLearn, int nReview) async {
+    try {
+      // 发送更改计划请求
+      Response response = await _dio.post('/plan/change/', queryParameters: {
+        'user_id': userID,
+        'dict_id': dictID,
+        'mode': mode,
+        'n_learn': nLearn,
+        'n_review': nReview,
+      });
+      return response;
+    } catch (error) {
+      rethrow;
+    }
+  }
 }
