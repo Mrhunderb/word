@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
+import 'package:words/dict/login_dict.dart';
 import 'package:words/home/home.dart';
 import 'package:words/login/model/respon.dart';
 import 'package:words/login/register.dart';
@@ -48,7 +49,11 @@ class _LoginPage extends State<LoginPage> {
         setInt(Preference.userId, respone.userID);
         setString(Preference.userName, username);
         setString(Preference.password, password);
-        Get.off(() => const HomePage());
+        if (respone.planID == 0) {
+          Get.off(() => const LoginDict());
+        } else {
+          Get.off(() => const HomePage());
+        }
       } else {
         _showLoginErrorSnackBar(context, respone.statusMsg);
       }
