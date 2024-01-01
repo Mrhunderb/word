@@ -5,8 +5,6 @@ import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/progress.dart';
 import 'package:words/dict/widget/word_list.dart';
 import 'package:words/home/widget/learn_button.dart';
-import 'package:words/quiz/model/quiz.dart';
-import 'package:words/word/model/word.dart';
 
 class MydictPage extends StatefulWidget {
   final Dict dict;
@@ -22,27 +20,6 @@ class MydictPage extends StatefulWidget {
 }
 
 class _MydictPageState extends State<MydictPage> {
-  List<Word> vocabulary = [
-    for (int i = 0; i < 50; i++)
-      Word(
-        word: 'abandon',
-        pronunciation: 'əˈbændən',
-        definition: ['v. 放弃，抛弃'],
-        enExample: ['He abandoned his family.', 'He abandoned his family.'],
-        chExample: ['他抛弃了他的家人。', '他抛弃了他的家人。'],
-        quiz: Quiz(
-          id: 1,
-          options: [
-            'cancel',
-            'postpone',
-            'delay',
-            'suspend',
-          ],
-          correctOption: 1,
-        ),
-      ),
-    // Add more words here
-  ];
   Row _dictContent() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

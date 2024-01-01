@@ -1,6 +1,7 @@
 import 'package:words/quiz/model/quiz.dart';
 
 class Word {
+  final int id;
   final String word;
   final String pronunciation;
   final List<String> definition;
@@ -9,6 +10,7 @@ class Word {
   final Quiz quiz;
 
   Word({
+    required this.id,
     required this.word,
     required this.pronunciation,
     required this.definition,
@@ -19,6 +21,7 @@ class Word {
 
   factory Word.fromJson(Map<String, dynamic> json) {
     // Extracting data from the JSON map
+    int id = json['WordID'] ?? 0;
     String word = json['Word'] ?? '';
     String pronunciation = json['Pronunciation'] ?? '';
 
@@ -43,6 +46,7 @@ class Word {
 
     // Creating and returning a Word object
     return Word(
+        id: id,
         word: word,
         pronunciation: pronunciation,
         definition: definitions,

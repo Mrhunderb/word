@@ -145,12 +145,12 @@ class ApiService {
     }
   }
 
-  Future<Response> addCollect(int userID, int wordID) async {
+  Future<String> addCollect(int userID, int wordID) async {
     try {
       // 发送添加收藏单词请求
-      Response response = await _dio.post('/user/collect/add/',
+      Response response = await _dio.post('/collect/add/',
           queryParameters: {'user_id': userID, 'word_id': wordID});
-      return response;
+      return response.data['StatusMsg'];
     } catch (error) {
       rethrow;
     }

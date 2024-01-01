@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:words/utils/api_service.dart';
+import 'package:words/utils/preference.dart';
 import 'package:words/word/model/word.dart';
 import 'package:words/word/wiget/audio_button.dart';
 import 'package:words/word/wiget/word_item.dart';
@@ -9,24 +12,52 @@ class WordSpec extends StatelessWidget {
   final Word word;
   final Function next;
 
+  void _showSnackBar(BuildContext context) {
+    int userID = getInt(Preference.userId);
+    var plan = ApiService().addCollect(userID, word.id);
+    plan.then((value) {
+      Get.snackbar(
+        "添加到生词本",
+        value,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    });
+  }
+
   const WordSpec({
     super.key,
     required this.word,
     required this.next,
   });
 
-  List<Widget> _specContetn() {
+  List<Widget> _specContetn(BuildContext context) {
     return [
-      Column(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            word.word,
-            style: const TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w900,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                word.word,
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              PlayAudioButton(word: word, type: 1),
+            ],
           ),
-          PlayAudioButton(word: word, type: 1),
+          Column(
+            children: [
+              IconButton(
+                onPressed: () {
+                  _showSnackBar(context);
+                },
+                icon: const Icon(Icons.bookmark_add_sharp),
+              )
+            ],
+          )
         ],
       ),
       WordItem(
@@ -108,7 +139,7 @@ class WordSpec extends StatelessWidget {
             ),
           ),
         ],
-      ).paddingOnly(bottom: 20),
+      ),
     ];
   }
 
@@ -119,7 +150,7 @@ class WordSpec extends StatelessWidget {
       children: [
         FractionallySizedBox(
           widthFactor: 0.9,
-          child: WordCard(contents: _specContetn()),
+          child: WordCard(contents: _specContetn(context)),
         ),
       ],
     );

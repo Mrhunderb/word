@@ -44,8 +44,6 @@ class _UserPageState extends State<UserPage> {
           CircleAvatar(
             radius: 45.0,
             backgroundColor: Theme.of(context).primaryColor,
-            // backgroundImage: NetworkImage(
-            //     'https://example.com/user_profile_image.jpg'), // 替换成用户头像的URL
           ),
           const SizedBox(width: 40.0),
           Column(
