@@ -34,7 +34,7 @@ class _MyPageState extends State<PlanPage> {
   @override
   void initState() {
     super.initState();
-    if (widget.plan == null) {
+    if (widget.plan!.dictID == 0) {
       _nLearn = 30;
       _nReview = 30;
       _progress = 0;
@@ -98,7 +98,7 @@ class _MyPageState extends State<PlanPage> {
                       height: 30,
                       width: 200,
                       child: GeneralProgress(
-                        achive: _progress,
+                        achive: widget.plan!.progress,
                         total: widget.dict.totalWords,
                       ),
                     ),
@@ -106,7 +106,7 @@ class _MyPageState extends State<PlanPage> {
                     Row(
                       children: [
                         Text(
-                          '$_progress/${widget.dict.totalWords}词',
+                          '${widget.plan!.progress}/${widget.dict.totalWords}词',
                           style: const TextStyle(
                             fontSize: 11,
                             color: Colors.grey,
@@ -128,7 +128,7 @@ class _MyPageState extends State<PlanPage> {
               hintText: "请选择学习顺序",
               items: mode,
               initialItem:
-                  widget.plan == null ? null : mode[widget.plan!.mode - 1],
+                  widget.plan!.mode == 0 ? null : mode[widget.plan!.mode - 1],
               onChanged: (String? newValue) {
                 setState(() {
                   currentOrder = newValue!;

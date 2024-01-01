@@ -70,7 +70,21 @@ class ApiService {
     try {
       // 发送获取用户计划请求
       Response response =
-          await _dio.get('/plan/', queryParameters: {'user_id': userID});
+          await _dio.get('/user/plan/', queryParameters: {'user_id': userID});
+      Plan plan = Plan.fromJson(response.data['Plan']);
+      return plan;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<Plan> getPlanByDict(int userID, int dictID) async {
+    try {
+      // 发送获取用户计划请求
+      Response response = await _dio.get('/plan/', queryParameters: {
+        'user_id': userID,
+        'dict_id': dictID,
+      });
       Plan plan = Plan.fromJson(response.data['Plan']);
       return plan;
     } catch (error) {

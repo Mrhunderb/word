@@ -3,6 +3,7 @@ import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/dict_item.dart';
 import 'package:words/plan/model/plan.dart';
 import 'package:words/utils/api_service.dart';
+import 'package:words/utils/preference.dart';
 
 class DictPage extends StatefulWidget {
   const DictPage({super.key});
@@ -14,12 +15,13 @@ class DictPage extends StatefulWidget {
 class _DictPageState extends State<DictPage> {
   late Future<List<Dict>> _dictFuture;
   late Future<Plan> _planFuture;
+  int userID = getInt(Preference.userId);
 
   @override
   void initState() {
     super.initState();
     _dictFuture = ApiService().getDictList();
-    _planFuture = ApiService().getPlan(2);
+    _planFuture = ApiService().getPlan(userID);
   }
 
   @override

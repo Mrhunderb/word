@@ -76,7 +76,7 @@ class HomeContent extends StatelessWidget {
                           cardHeight: 205.0,
                           content: planContent(plan),
                           funcOnTap: () {
-                            Get.to(() => PlanPage(dict: mydict, plan: plan));
+                            Get.to(() => PlanPage(dict: mydict));
                           },
                         ),
                         const SizedBox(height: 20),

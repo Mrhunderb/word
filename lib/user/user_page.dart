@@ -91,7 +91,7 @@ class _UserPageState extends State<UserPage> {
         leading: const Icon(Icons.date_range),
         title: const Text('我的计划'),
         onTap: () {
-          Get.to(() => PlanPage(dict: mydict, plan: plan));
+          Get.to(() => PlanPage(dict: mydict));
         },
       ),
       ListTile(

@@ -5,6 +5,8 @@ import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/widget/dict_spec.dart';
 import 'package:words/plan/model/plan.dart';
 import 'package:words/plan/plan_page.dart';
+import 'package:words/utils/api_service.dart';
+import 'package:words/utils/preference.dart';
 
 class DictItem extends StatelessWidget {
   final Dict dict;
@@ -14,6 +16,14 @@ class DictItem extends StatelessWidget {
     required this.dict,
     required this.plan,
   });
+
+  Future<void> fetchData(int dictID) async {
+    int userID = getInt(Preference.userId);
+    var plan = ApiService().getPlanByDict(userID, dictID);
+    plan.then((value) {
+      Get.to(() => PlanPage(dict: dict, plan: value));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +76,7 @@ class DictItem extends StatelessWidget {
                         : FilledButton(
                             child: const Text('学习'),
                             onPressed: () {
-                              Get.to(() => PlanPage(dict: dict));
+                              fetchData(dict.id);
                             },
                           ),
                   ],

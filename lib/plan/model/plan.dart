@@ -19,13 +19,13 @@ class Plan {
 
   factory Plan.fromJson(Map<String, dynamic> json) {
     return Plan(
-      planID: json['PlanID'],
-      mode: json['Mode'],
-      nLearn: json['NLearn'],
-      nReview: json['NReview'],
-      userID: json['UserID'],
-      dictID: json['DictID'],
-      progress: json['Progress'],
+      planID: json['PlanID'] ?? 0,
+      mode: json['Mode'] ?? 0,
+      nLearn: json['NLearn'] ?? 30,
+      nReview: json['NReview'] ?? 30,
+      userID: json['UserID'] ?? 0,
+      dictID: json['DictID'] ?? 0,
+      progress: json['Progress'] ?? 0,
     );
   }
 }
