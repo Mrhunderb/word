@@ -9,6 +9,7 @@ class ViewSpec extends StatelessWidget {
   final Function next;
   final int index;
   final int total;
+  final int planID;
   // final FlipController _controller = FlipController(isFront: true);
   final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
 
@@ -18,6 +19,7 @@ class ViewSpec extends StatelessWidget {
     required this.next,
     required this.index,
     required this.total,
+    required this.planID,
   });
 
   @override
@@ -26,7 +28,7 @@ class ViewSpec extends StatelessWidget {
       flipOnTouch: false,
       key: cardKey,
       front: WordView(cardKey: cardKey, word: word, index: index, total: total),
-      back: WordSpec(next: next, word: word),
+      back: WordSpec(next: next, word: word, planID: planID),
     );
   }
 }

@@ -10,7 +10,15 @@ import 'package:words/word/wiget/word_card.dart';
 
 class WordSpec extends StatelessWidget {
   final Word word;
+  final int planID;
   final Function next;
+
+  const WordSpec({
+    super.key,
+    required this.word,
+    required this.planID,
+    required this.next,
+  });
 
   void _showSnackBar(BuildContext context) {
     int userID = getInt(Preference.userId);
@@ -24,11 +32,10 @@ class WordSpec extends StatelessWidget {
     });
   }
 
-  const WordSpec({
-    super.key,
-    required this.word,
-    required this.next,
-  });
+  void _addHistory() {
+    int userID = getInt(Preference.userId);
+    ApiService().addHistory(userID, word.id);
+  }
 
   List<Widget> _specContetn(BuildContext context) {
     return [
@@ -128,6 +135,7 @@ class WordSpec extends StatelessWidget {
               ),
             ),
             onPressed: () {
+              _addHistory();
               next();
             },
             child: const Text(

@@ -71,6 +71,7 @@ class _WordPageState extends State<WordPage> {
                   index: i,
                   total: list.length,
                   next: _next,
+                  planID: widget.planId,
                 ),
             ];
             return PageView(
