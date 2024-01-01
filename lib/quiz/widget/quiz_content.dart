@@ -34,7 +34,7 @@ class QuizContent extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            QuizButton(word: word),
+            QuizButton(word: word, index: index, total: total),
           ],
         ),
       ),

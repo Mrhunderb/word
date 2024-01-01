@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:words/home/home.dart';
+import 'package:words/user/model/user.dart';
 import 'package:words/utils/api_service.dart';
 import 'package:words/utils/preference.dart';
 import 'package:words/word/model/word.dart';
@@ -12,12 +14,16 @@ class WordSpec extends StatelessWidget {
   final Word word;
   final int planID;
   final Function next;
+  final int index;
+  final int total;
 
   const WordSpec({
     super.key,
     required this.word,
     required this.planID,
     required this.next,
+    required this.index,
+    required this.total,
   });
 
   void _showSnackBar(BuildContext context) {
@@ -117,7 +123,15 @@ class WordSpec extends StatelessWidget {
             ),
             onPressed: () {
               _addHistory(0);
-              next();
+              if (index == total - 1) {
+                int userId = getInt(Preference.userId);
+                String userName = getString(Preference.userName);
+                int planId = getInt(Preference.planId);
+                User user = User(id: userId, name: userName, planID: planId);
+                Get.off(() => HomePage(user: user));
+              } else {
+                next();
+              }
             },
             child: const Text(
               '不认识',
@@ -136,7 +150,15 @@ class WordSpec extends StatelessWidget {
             ),
             onPressed: () {
               _addHistory(1);
-              next();
+              if (index == total - 1) {
+                int userId = getInt(Preference.userId);
+                String userName = getString(Preference.userName);
+                int planId = getInt(Preference.planId);
+                User user = User(id: userId, name: userName, planID: planId);
+                Get.off(() => HomePage(user: user));
+              } else {
+                next();
+              }
             },
             child: const Text(
               '认识',

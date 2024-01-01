@@ -28,7 +28,8 @@ class ViewSpec extends StatelessWidget {
       flipOnTouch: false,
       key: cardKey,
       front: WordView(cardKey: cardKey, word: word, index: index, total: total),
-      back: WordSpec(next: next, word: word, planID: planID),
+      back: WordSpec(
+          next: next, word: word, planID: planID, index: index, total: total),
     );
   }
 }

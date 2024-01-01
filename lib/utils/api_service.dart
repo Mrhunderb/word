@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/home/model/today.dart';
 import 'package:words/plan/model/plan.dart';
+import 'package:words/user/model/history.dart';
 import 'package:words/user/model/user.dart';
 import 'package:words/word/model/word.dart';
 
@@ -10,6 +11,7 @@ class ApiService {
 
   ApiService() : _dio = Dio() {
     BaseOptions options = BaseOptions(
+      // baseUrl: "http://8.130.43.53:8080",
       baseUrl: "http://192.168.1.101:8080",
       connectTimeout: const Duration(milliseconds: 3000),
       receiveTimeout: const Duration(milliseconds: 3000),
@@ -111,8 +113,11 @@ class ApiService {
       Response response =
           await _dio.get('/word/today/', queryParameters: {'plan_id': planID});
       List<dynamic> wordsList = response.data['Words'];
+      List<dynamic> reviewList = response.data['Review'];
       List<Word> words = wordsList.map((json) => Word.fromJson(json)).toList();
-      return words;
+      List<Word> review =
+          reviewList.map((json) => Word.fromJson(json)).toList();
+      return words + review;
     } catch (error) {
       rethrow;
     }
@@ -210,6 +215,19 @@ class ApiService {
         nLearn: response.data['n_learn'],
         nReview: response.data['n_review'],
       );
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<MyHistory> getHistoryInfo(int userId) async {
+    try {
+      // 发送获取历史记录请求
+      Response response = await _dio.get('/user/history/', queryParameters: {
+        'user_id': userId,
+      });
+      MyHistory history = MyHistory.fromJson(response.data);
+      return history;
     } catch (error) {
       rethrow;
     }

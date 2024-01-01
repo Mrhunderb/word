@@ -5,10 +5,14 @@ import 'package:words/word/model/word.dart';
 
 class QuizButton extends StatefulWidget {
   final Word word;
+  final int index;
+  final int total;
 
   const QuizButton({
     super.key,
     required this.word,
+    required this.index,
+    required this.total,
   });
 
   @override
@@ -102,10 +106,14 @@ class _QuizButtonState extends State<QuizButton> {
                         ),
                       ),
                       onPressed: () {
-                        controller.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
+                        if (widget.index == widget.total - 1) {
+                          Get.back();
+                        } else {
+                          controller.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        }
                       },
                       child: const Text("下一题")),
                 ],

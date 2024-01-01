@@ -1,17 +1,20 @@
-import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:words/home/home.dart';
+import 'package:words/home/model/today.dart';
+import 'package:words/user/model/user.dart';
 import 'package:words/utils/api_service.dart';
+import 'package:words/utils/preference.dart';
 import 'package:words/word/model/word.dart';
 import 'package:words/word/wiget/view_spec.dart';
 
 class WordPage extends StatefulWidget {
   final int planId;
+  final Today today;
   const WordPage({
     super.key,
     required this.planId,
+    required this.today,
   });
 
   @override
@@ -42,7 +45,36 @@ class _WordPageState extends State<WordPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Get.off(() => const HomePage());
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('结束学习'),
+                  content: const Text('今天就学到这里了吗？'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        // 关闭AlertDialog
+                        int userId = getInt(Preference.userId);
+                        String userName = getString(Preference.userName);
+                        int planId = getInt(Preference.planId);
+                        User user =
+                            User(id: userId, name: userName, planID: planId);
+                        Get.off(() => HomePage(user: user));
+                      },
+                      child: const Text('确定结束'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // 关闭AlertDialog
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('继续学习'),
+                    ),
+                  ],
+                );
+              },
+            );
           },
         ),
         title: const Text('背单词'),
@@ -65,8 +97,10 @@ class _WordPageState extends State<WordPage> {
             );
           } else {
             List<Word> list = snapshot.data as List<Word>;
+            int index =
+                (widget.today.nLearn + widget.today.nReview) % list.length;
             List<Widget> words = [
-              for (int i = 0; i < list.length; i++)
+              for (int i = index; i < list.length; i++)
                 ViewSpec(
                   word: list[i],
                   index: i,

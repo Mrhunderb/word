@@ -5,14 +5,14 @@ import 'package:words/plan/model/plan.dart';
 import 'package:words/utils/api_service.dart';
 import 'package:words/utils/preference.dart';
 
-class DictPage extends StatefulWidget {
-  const DictPage({super.key});
+class HomeDict extends StatefulWidget {
+  const HomeDict({super.key});
 
   @override
-  State<DictPage> createState() => _DictPageState();
+  State<HomeDict> createState() => _DictPageState();
 }
 
-class _DictPageState extends State<DictPage> {
+class _DictPageState extends State<HomeDict> {
   late Future<List<Dict>> _dictFuture;
   late Future<Plan> _planFuture;
   int userID = getInt(Preference.userId);
@@ -26,12 +26,8 @@ class _DictPageState extends State<DictPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("词典列表"),
-        centerTitle: true,
-      ),
-      body: FutureBuilder<List<dynamic>>(
+    return Center(
+      child: FutureBuilder<List<dynamic>>(
         future: Future.wait([_dictFuture, _planFuture]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

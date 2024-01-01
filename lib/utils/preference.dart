@@ -5,7 +5,9 @@ late SharedPreferences prefs;
 enum Preference {
   userId(key: "userId", type: "int"), // 用户ID
   userName(key: "userName", type: "String"), // 帐号
-  password(key: "password", type: "String"); // 密码
+  password(key: "password", type: "String"), // 密码
+  planId(key: "planId", type: "int"),
+  lastIndex(key: "lastIndex", type: "int");
 
   const Preference({required this.key, this.type = "String"});
   factory Preference.fromKey(String key) {

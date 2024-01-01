@@ -8,6 +8,7 @@ import 'package:words/dict/widget/progress.dart';
 import 'package:words/home/home.dart';
 import 'package:words/home/widget/learn_button.dart';
 import 'package:words/plan/model/plan.dart';
+import 'package:words/user/model/user.dart';
 import 'package:words/utils/api_service.dart';
 import 'package:words/utils/preference.dart';
 
@@ -189,12 +190,42 @@ class _MyPageState extends State<PlanPage> {
                 if (_mode == 0) {
                   _showErrorSnackBar(context, "请选择学习顺序");
                 } else {
-                  ApiService()
-                      .changePlan(getInt(Preference.userId), widget.dict.id,
-                          _mode, _nLearn, _nReview)
-                      .then((value) {
-                    Get.off(() => const HomePage());
-                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('确认修改'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              // 关闭AlertDialog
+                              ApiService()
+                                  .changePlan(getInt(Preference.userId),
+                                      widget.dict.id, _mode, _nLearn, _nReview)
+                                  .then((value) {
+                                setInt(Preference.planId, value.data['PlanId']);
+                                int userId = getInt(Preference.userId);
+                                String userName =
+                                    getString(Preference.userName);
+                                int planId = value.data['PlanId'];
+                                User user = User(
+                                    id: userId, name: userName, planID: planId);
+                                Get.off(() => HomePage(user: user));
+                              });
+                            },
+                            child: const Text('确定'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // 关闭AlertDialog
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('返回'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 }
               },
             ),

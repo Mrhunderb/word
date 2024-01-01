@@ -9,6 +9,7 @@ import 'package:words/login/widget/app_icon.dart';
 import 'package:words/login/widget/login_button.dart';
 import 'package:words/login/widget/login_hint.dart';
 import 'package:words/login/widget/login_input.dart';
+import 'package:words/user/model/user.dart';
 import 'package:words/utils/api_service.dart';
 
 import '../utils/preference.dart';
@@ -49,10 +50,16 @@ class _LoginPage extends State<LoginPage> {
         setInt(Preference.userId, respone.userID);
         setString(Preference.userName, username);
         setString(Preference.password, password);
+        setInt(Preference.planId, respone.planID);
+        User user = User(
+          id: respone.userID,
+          name: username,
+          planID: respone.planID,
+        );
         if (respone.planID == 0) {
           Get.off(() => const LoginDict());
         } else {
-          Get.off(() => const HomePage());
+          Get.off(() => HomePage(user: user));
         }
       } else {
         _showLoginErrorSnackBar(context, respone.statusMsg);
