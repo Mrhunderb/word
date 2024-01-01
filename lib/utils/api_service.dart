@@ -156,6 +156,17 @@ class ApiService {
     }
   }
 
+  Future<Response> deleteCollect(int userID, int wordID) async {
+    try {
+      // 发送删除收藏单词请求
+      Response response = await _dio.post('/collect/delete/',
+          queryParameters: {'user_id': userID, 'word_id': wordID});
+      return response;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   Future<Response> changePlan(
       int userID, int dictID, int mode, int nLearn, int nReview) async {
     try {
@@ -173,12 +184,13 @@ class ApiService {
     }
   }
 
-  Future<Response> addHistory(int userID, int wordID) async {
+  Future<Response> addHistory(int planID, int wordID, int isKnow) async {
     try {
       // 发送添加历史记录请求
       Response response = await _dio.post('/word/history/', queryParameters: {
-        'user_id': userID,
+        'plan_id': planID,
         'word_id': wordID,
+        'is_know': isKnow,
       });
       return response;
     } catch (error) {

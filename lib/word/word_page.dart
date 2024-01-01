@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:words/home/home.dart';
 import 'package:words/utils/api_service.dart';
 import 'package:words/word/model/word.dart';
 import 'package:words/word/wiget/view_spec.dart';
@@ -41,7 +42,7 @@ class _WordPageState extends State<WordPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Get.back();
+            Get.off(() => const HomePage());
           },
         ),
         title: const Text('背单词'),

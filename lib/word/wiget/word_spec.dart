@@ -32,9 +32,9 @@ class WordSpec extends StatelessWidget {
     });
   }
 
-  void _addHistory() {
+  void _addHistory(int isKnow) {
     int userID = getInt(Preference.userId);
-    ApiService().addHistory(userID, word.id);
+    ApiService().addHistory(userID, word.id, isKnow);
   }
 
   List<Widget> _specContetn(BuildContext context) {
@@ -117,6 +117,7 @@ class WordSpec extends StatelessWidget {
               ),
             ),
             onPressed: () {
+              _addHistory(0);
               next();
             },
             child: const Text(
@@ -135,7 +136,7 @@ class WordSpec extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              _addHistory();
+              _addHistory(1);
               next();
             },
             child: const Text(

@@ -42,6 +42,7 @@ class _CollectPageState extends State<CollectPage> {
             TextButton(
               child: const Text('删除'),
               onPressed: () {
+                ApiService().deleteCollect(userId, vocabulary[index].id);
                 setState(() {
                   vocabulary.removeAt(index);
                 });
