@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:ming_cute_icons/ming_cute_icons.dart';
 import 'package:words/home/model/plan_info.dart';
+import 'package:words/home/model/today.dart';
 import 'package:words/plan/model/plan.dart';
 
 const TextStyle _planStyle = TextStyle(fontSize: 16);
@@ -10,7 +11,7 @@ const TextStyle _planStyleBold = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
-List<Widget> planContent(Plan plan) {
+List<Widget> planContent(Plan plan, Today today) {
   List<LearnInfo> list = [
     LearnInfo(
         title: "计划学习",
@@ -18,12 +19,12 @@ List<Widget> planContent(Plan plan) {
         icon: MingCuteIcons.mgc_calendar_2_fill),
     LearnInfo(
       title: "待新学",
-      todo: 40,
+      todo: plan.nLearn - today.nLearn > 0 ? plan.nLearn - today.nLearn : 0,
       icon: MingCuteIcons.mgc_report_fill,
     ),
     LearnInfo(
       title: "待复习",
-      todo: plan.nReview,
+      todo: plan.nReview - today.nReview > 0 ? plan.nReview - today.nReview : 0,
       icon: MingCuteIcons.mgc_repeat_fill,
     ),
   ];

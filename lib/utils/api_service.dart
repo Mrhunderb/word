@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:words/dict/model/dict.dart';
+import 'package:words/home/model/today.dart';
 import 'package:words/plan/model/plan.dart';
 import 'package:words/user/model/user.dart';
 import 'package:words/word/model/word.dart';
@@ -193,6 +194,22 @@ class ApiService {
         'is_know': isKnow,
       });
       return response;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<Today> getTodyLearn(int planID) async {
+    try {
+      // 发送获取今日学习情况请求
+      Response response =
+          await _dio.get('/word/today/learn/', queryParameters: {
+        'plan_id': planID,
+      });
+      return Today(
+        nLearn: response.data['n_learn'],
+        nReview: response.data['n_review'],
+      );
     } catch (error) {
       rethrow;
     }

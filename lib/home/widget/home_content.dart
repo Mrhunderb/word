@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:words/dict/model/dict.dart';
 import 'package:words/dict/mydirct_page.dart';
+import 'package:words/home/model/today.dart';
 import 'package:words/plan/model/plan.dart';
 import 'package:words/plan/plan_page.dart';
 import 'package:words/quiz/quiz_page.dart';
@@ -31,6 +31,12 @@ class HomeContent extends StatelessWidget {
     return dict;
   }
 
+  Future<Today> _fetchTodyLearn(int planID) async {
+    // 获取今日单词
+    Future<Today> today = ApiService().getTodyLearn(planID);
+    return today;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -39,10 +45,12 @@ class HomeContent extends StatelessWidget {
         if (snapshot.hasData) {
           Plan? plan = snapshot.data;
           return FutureBuilder(
-            future: _fecthDict(plan!.dictID),
+            future: Future.wait(
+                [_fecthDict(plan!.dictID), _fetchTodyLearn(plan.planID)]),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                Dict? mydict = snapshot.data;
+                Dict? mydict = snapshot.data![0] as Dict?;
+                Today today = snapshot.data![1] as Today;
                 return Center(
                   child: FractionallySizedBox(
                     widthFactor: 0.9,
@@ -74,7 +82,7 @@ class HomeContent extends StatelessWidget {
                         ItemCard(
                           title: "今日计划",
                           cardHeight: 205.0,
-                          content: planContent(plan),
+                          content: planContent(plan, today),
                           funcOnTap: () {
                             Get.to(() => PlanPage(dict: mydict, plan: plan));
                           },
