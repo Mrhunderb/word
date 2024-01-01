@@ -29,7 +29,6 @@ class _MyPageState extends State<PlanPage> {
   String currentOrder = '无';
   late int _nLearn;
   late int _nReview;
-  late int _progress;
 
   @override
   void initState() {
@@ -37,11 +36,9 @@ class _MyPageState extends State<PlanPage> {
     if (widget.plan!.dictID == 0) {
       _nLearn = 30;
       _nReview = 30;
-      _progress = 0;
     } else {
       _nLearn = widget.plan!.nLearn;
       _nReview = widget.plan!.nReview;
-      _progress = widget.plan!.progress;
     }
   }
 

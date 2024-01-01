@@ -91,7 +91,7 @@ class _UserPageState extends State<UserPage> {
         leading: const Icon(Icons.date_range),
         title: const Text('我的计划'),
         onTap: () {
-          Get.to(() => PlanPage(dict: mydict));
+          Get.to(() => PlanPage(dict: mydict, plan: plan));
         },
       ),
       ListTile(
@@ -128,31 +128,32 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Center(
       child: FractionallySizedBox(
-          widthFactor: 0.9,
-          child: FutureBuilder(
-            future: _fetchUser(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                plan = snapshot.data!;
-                return FutureBuilder(
-                  future: _fechDict(plan.dictID),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      mydict = snapshot.data!;
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: pageConetnt(),
-                      );
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  },
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            },
-          )),
+        widthFactor: 0.9,
+        child: FutureBuilder(
+          future: _fetchUser(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              plan = snapshot.data!;
+              return FutureBuilder(
+                future: _fechDict(plan.dictID),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    mydict = snapshot.data!;
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: pageConetnt(),
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
+      ),
     );
   }
 }
