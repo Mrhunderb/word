@@ -33,8 +33,7 @@ class WordSpec extends StatelessWidget {
   }
 
   void _addHistory(int isKnow) {
-    int userID = getInt(Preference.userId);
-    ApiService().addHistory(userID, word.id, isKnow);
+    ApiService().addHistory(planID, word.id, isKnow);
   }
 
   List<Widget> _specContetn(BuildContext context) {
