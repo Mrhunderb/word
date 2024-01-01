@@ -29,6 +29,7 @@ class _MyPageState extends State<PlanPage> {
   String currentOrder = '无';
   late int _nLearn;
   late int _nReview;
+  late int _mode;
 
   @override
   void initState() {
@@ -36,9 +37,11 @@ class _MyPageState extends State<PlanPage> {
     if (widget.plan!.dictID == 0) {
       _nLearn = 30;
       _nReview = 30;
+      _mode = 0;
     } else {
       _nLearn = widget.plan!.nLearn;
       _nReview = widget.plan!.nReview;
+      _mode = widget.plan!.mode;
     }
   }
 
@@ -128,7 +131,7 @@ class _MyPageState extends State<PlanPage> {
                   widget.plan!.mode == 0 ? null : mode[widget.plan!.mode - 1],
               onChanged: (String? newValue) {
                 setState(() {
-                  currentOrder = newValue!;
+                  _mode = mode.indexOf(newValue!) + 1;
                 });
               },
             ),
@@ -183,12 +186,12 @@ class _MyPageState extends State<PlanPage> {
             LearnButton(
               buttonText: "保存修改",
               funcOnTap: () {
-                if (!mode.contains(currentOrder)) {
+                if (_mode == 0) {
                   _showErrorSnackBar(context, "请选择学习顺序");
                 } else {
                   ApiService()
                       .changePlan(getInt(Preference.userId), widget.dict.id,
-                          mode.indexOf(currentOrder) + 1, _nLearn, _nReview)
+                          _mode, _nLearn, _nReview)
                       .then((value) {
                     Get.off(() => const HomePage());
                   });
