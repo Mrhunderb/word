@@ -11,8 +11,7 @@ class ApiService {
 
   ApiService() : _dio = Dio() {
     BaseOptions options = BaseOptions(
-      // baseUrl: "http://8.130.43.53:8080",
-      baseUrl: "http://192.168.1.101:8080",
+      baseUrl: "http://8.130.43.53:8080",
       connectTimeout: const Duration(milliseconds: 3000),
       receiveTimeout: const Duration(milliseconds: 3000),
     );

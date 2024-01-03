@@ -120,7 +120,7 @@ class _UserPageState extends State<UserPage> {
           // 处理注销逻辑
           // 可以弹出确认对话框，然后执行注销操作
           prefs.clear();
-          Get.off(() => const LoginPage());
+          Get.offAll(() => const LoginPage());
         },
       ),
       const SizedBox(height: 30),

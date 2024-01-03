@@ -60,7 +60,7 @@ class _WordPageState extends State<WordPage> {
                         int planId = getInt(Preference.planId);
                         User user =
                             User(id: userId, name: userName, planID: planId);
-                        Get.off(() => HomePage(user: user));
+                        Get.offAll(() => HomePage(user: user));
                       },
                       child: const Text('确定结束'),
                     ),
@@ -109,10 +109,13 @@ class _WordPageState extends State<WordPage> {
                   planID: widget.planId,
                 ),
             ];
-            return PageView(
-              controller: _controller,
-              physics: const NeverScrollableScrollPhysics(),
-              children: words,
+            return PopScope(
+              canPop: false,
+              child: PageView(
+                controller: _controller,
+                physics: const NeverScrollableScrollPhysics(),
+                children: words,
+              ),
             );
           }
         },

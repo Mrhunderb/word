@@ -21,7 +21,7 @@ class LoginDictItem extends StatelessWidget {
     int userID = getInt(Preference.userId);
     var plan = ApiService().getPlanByDict(userID, dictID);
     plan.then((value) {
-      Get.off(() => PlanPage(dict: dict, plan: value));
+      Get.offAll(() => PlanPage(dict: dict, plan: value));
     });
   }
 

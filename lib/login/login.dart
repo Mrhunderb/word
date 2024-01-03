@@ -57,9 +57,9 @@ class _LoginPage extends State<LoginPage> {
           planID: respone.planID,
         );
         if (respone.planID == 0) {
-          Get.off(() => const LoginDict());
+          Get.offAll(() => const LoginDict());
         } else {
-          Get.off(() => HomePage(user: user));
+          Get.offAll(() => HomePage(user: user));
         }
       } else {
         _showLoginErrorSnackBar(context, respone.statusMsg);
@@ -124,7 +124,6 @@ class _LoginPage extends State<LoginPage> {
         padding: EdgeInsets.only(
           left: widthOfSquare,
           right: widthOfSquare,
-          // top: kToolbarHeight,
         ),
         child: loginContent(),
       ),

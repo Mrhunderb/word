@@ -128,7 +128,7 @@ class WordSpec extends StatelessWidget {
                 String userName = getString(Preference.userName);
                 int planId = getInt(Preference.planId);
                 User user = User(id: userId, name: userName, planID: planId);
-                Get.off(() => HomePage(user: user));
+                Get.offAll(() => HomePage(user: user));
               } else {
                 next();
               }
@@ -155,7 +155,7 @@ class WordSpec extends StatelessWidget {
                 String userName = getString(Preference.userName);
                 int planId = getInt(Preference.planId);
                 User user = User(id: userId, name: userName, planID: planId);
-                Get.off(() => HomePage(user: user));
+                Get.offAll(() => HomePage(user: user));
               } else {
                 next();
               }

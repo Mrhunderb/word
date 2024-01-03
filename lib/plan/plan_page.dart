@@ -210,7 +210,7 @@ class _MyPageState extends State<PlanPage> {
                                 int planId = value.data['PlanId'];
                                 User user = User(
                                     id: userId, name: userName, planID: planId);
-                                Get.off(() => HomePage(user: user));
+                                Get.offAll(() => HomePage(user: user));
                               });
                             },
                             child: const Text('确定'),
