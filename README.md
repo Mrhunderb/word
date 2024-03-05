@@ -6,14 +6,20 @@
 
 项目初衷是为了完成学校课程设计，现成绩已公布，遂将本项目开源，供大家使用
 
-## 效果展示
-![登陆](./.res/0.login.jpg)
-![首页](./.res/1.home.jpg)
-![计划](./.res/5.plan.jpg)
-![单词](./.res/7.spec.jpg)
-![测试](./.res/8.test.jpg)
-
 ## 构建环境
 Flutter 3.16.8 
 
 Tools • Dart 3.2.5 • DevTools 2.28.5
+
+## 效果展示
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <img src=".res/0.login.jpg" alt="登陆" style="width: 30%;">
+    <img src=".res/1.home.jpg" alt="首页" style="width: 30%;">
+    <img src=".res/2.dict.jpg" alt="词典" style="width: 30%;">
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+    <img src=".res/5.plan.jpg" alt="计划" style="width: 30%;">
+    <img src=".res/7.spec.jpg" alt="单词" style="width: 30%;">
+    <img src=".res/8.test.jpg" alt="测试" style="width: 30%;">
+</div>
